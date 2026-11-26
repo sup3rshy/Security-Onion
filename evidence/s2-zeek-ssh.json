@@ -1,0 +1,928 @@
+{
+  "took": 32,
+  "timed_out": false,
+  "_shards": {
+    "total": 4,
+    "successful": 4,
+    "skipped": 2,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 22,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "SDQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 38248,
+            "id": {
+              "uid": "CIrZH6dIqxXJFOQy3"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "hassh_version": "1.0",
+            "authentication": {
+              "attempts": 0
+            }
+          },
+          "source": {
+            "port": 39482,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616202.448064,\"uid\":\"CIrZH6dIqxXJFOQy3\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":39482,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"auth_attempts\":0,\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"hasshVersion\":\"1.0\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:16:42.448Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39482",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:16:55Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          }
+        },
+        "sort": [
+          1795616202448
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "RzQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 36225,
+            "id": {
+              "uid": "CO3bcq4M9tcghMjYf3"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 39474,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616202.258193,\"uid\":\"CO3bcq4M9tcghMjYf3\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":39474,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:16:42.258Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39474",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:16:55Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795616202258
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "STQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 38479,
+            "id": {
+              "uid": "CX8wabwZbZ0vVGf0h"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "hassh_version": "1.0",
+            "authentication": {
+              "attempts": 0
+            }
+          },
+          "source": {
+            "port": 39460,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616202.009868,\"uid\":\"CX8wabwZbZ0vVGf0h\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":39460,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"auth_attempts\":0,\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"hasshVersion\":\"1.0\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:16:42.009Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39460",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:16:55Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          }
+        },
+        "sort": [
+          1795616202009
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "ODQPE6IByb7RItSi11D1",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 34202,
+            "id": {
+              "uid": "Cq5VY02tSscaE5tk5d"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 39938,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616110.793912,\"uid\":\"Cq5VY02tSscaE5tk5d\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":39938,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:15:10.793Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39938",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:15:35Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795616110793
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "ATQPE6IByb7RItSiiVCR",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 32181,
+            "id": {
+              "uid": "Cf6zL12LtBjHfVEM6"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 40570,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616100.35639,\"uid\":\"Cf6zL12LtBjHfVEM6\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":40570,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:15:00.356Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "40570",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:15:15Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795616100356
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "wzQPE6IByb7RItSiYk-D",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 31949,
+            "id": {
+              "uid": "ClNNV236NQg2rvvLJ9"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "hassh_version": "1.0",
+            "authentication": {
+              "attempts": 0
+            }
+          },
+          "source": {
+            "port": 35466,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616091.314686,\"uid\":\"ClNNV236NQg2rvvLJ9\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":35466,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"auth_attempts\":0,\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"hasshVersion\":\"1.0\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:14:51.314Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "35466",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:15:05Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          }
+        },
+        "sort": [
+          1795616091314
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "pDQME6IByb7RItSiyU3w",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 29926,
+            "id": {
+              "uid": "CG5wIj3roybD6QyEe5"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 58788,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795615914.511537,\"uid\":\"CG5wIj3roybD6QyEe5\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":58788,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:11:54.511Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "58788",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:12:14Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795615914511
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "hTQME6IByb7RItSiok3a",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 27903,
+            "id": {
+              "uid": "CNhYWt2v6qPUSHvdA8"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 40600,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795615903.928111,\"uid\":\"CNhYWt2v6qPUSHvdA8\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":40600,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:11:43.928Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "40600",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:12:04Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795615903928
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "JjQME6IByb7RItSiLU2l",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 25881,
+            "id": {
+              "uid": "CNqtlH10Ko7tKEsh6"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 55650,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795615870.202254,\"uid\":\"CNqtlH10Ko7tKEsh6\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":55650,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:11:10.202Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "55650",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:11:34Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795615870202
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "UjQKE6IByb7RItSiMUsy",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "ssh.log"
+          },
+          "server": {
+            "port": "22",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134792555",
+              "path": "/nsm/zeek/logs/current/ssh.log",
+              "device_id": "64514"
+            },
+            "offset": 23859,
+            "id": {
+              "uid": "CG6WVz4i9RrrZFP131"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "ssh": {
+            "server": "SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1",
+            "mac_algorithm": "hmac-sha1",
+            "hassh_server_algorithms": "diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com",
+            "compression_algorithm": "none",
+            "client_host_key_algorithms": "ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com",
+            "hassh_algorithms": "curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none",
+            "server_host_key_algorithms": "ssh-rsa,ssh-dss",
+            "hassh_server": "2270b0152ebe5afb20df3041c7f076a2",
+            "version": 2,
+            "kex_algorithm": "diffie-hellman-group-exchange-sha256",
+            "cipher_algorithm": "aes128-ctr",
+            "host_key": "56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3",
+            "host_key_algorithm": "ssh-rsa",
+            "client": "SSH-2.0-paramiko_4.0.0",
+            "hassh_version": "1.0",
+            "authentication": {
+              "success": true,
+              "attempts": 1
+            }
+          },
+          "source": {
+            "port": 37308,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795615739.68743,\"uid\":\"CG6WVz4i9RrrZFP131\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":37308,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":22,\"version\":2,\"auth_success\":true,\"auth_attempts\":1,\"client\":\"SSH-2.0-paramiko_4.0.0\",\"server\":\"SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1\",\"cipher_alg\":\"aes128-ctr\",\"mac_alg\":\"hmac-sha1\",\"compression_alg\":\"none\",\"kex_alg\":\"diffie-hellman-group-exchange-sha256\",\"host_key_alg\":\"ssh-rsa\",\"host_key\":\"56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3\",\"hasshVersion\":\"1.0\",\"hassh\":\"a2de0f306611e0957be704f5b0e35a82\",\"hasshServer\":\"2270b0152ebe5afb20df3041c7f076a2\",\"cshka\":\"ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com\",\"hasshAlgorithms\":\"curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com;aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc,3des-cbc,aes128-gcm@openssh.com,aes256-gcm@openssh.com;hmac-sha2-256,hmac-sha2-512,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1,hmac-md5,hmac-sha1-96,hmac-md5-96;none\",\"sshka\":\"ssh-rsa,ssh-dss\",\"hasshServerAlgorithms\":\"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1;aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour128,arcfour256,arcfour,aes192-cbc,aes256-cbc,rijndael-cbc@lysator.liu.se,aes128-ctr,aes192-ctr,aes256-ctr;hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96;none,zlib@openssh.com\"}",
+          "tags": [
+            "ssh"
+          ],
+          "pipeline": "ssh",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "@timestamp": "2026-11-25T14:08:59.687Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "37308",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:09:24Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.ssh"
+          },
+          "hash": {
+            "hassh": "a2de0f306611e0957be704f5b0e35a82"
+          }
+        },
+        "sort": [
+          1795615739687
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,513 @@
+{
+  "took": 7,
+  "timed_out": false,
+  "_shards": {
+    "total": 4,
+    "successful": 4,
+    "skipped": 2,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 7,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "OzQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "files.log"
+          },
+          "server": {
+            "port": "80",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134762023",
+              "path": "/nsm/zeek/logs/current/files.log",
+              "device_id": "64514"
+            },
+            "offset": 2631,
+            "id": {
+              "uid": "COznAckI19fPeYlR7",
+              "fuid": "FXvRQ13k3spoHCers8"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 80,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 43960,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616202.530923,\"fuid\":\"FXvRQ13k3spoHCers8\",\"uid\":\"COznAckI19fPeYlR7\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":43960,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":80,\"source\":\"HTTP\",\"depth\":0,\"analyzers\":[\"MD5\",\"SHA1\"],\"mime_type\":\"text/html\",\"duration\":0.0004050731658935547,\"local_orig\":true,\"is_orig\":false,\"seen_bytes\":891,\"missing_bytes\":0,\"overflow_bytes\":0,\"timedout\":false,\"md5\":\"cfe398bfbf64d86085ba7db4d09d7705\",\"sha1\":\"fa0d49705f819d948d370259428d2085a399128e\",\"community_id\":\"1:j5kyC3E8e6tAoUEnKSPkD26hGiQ=\"}",
+          "network": {
+            "community_id": "1:j5kyC3E8e6tAoUEnKSPkD26hGiQ="
+          },
+          "tags": [
+            "file"
+          ],
+          "pipeline": "files",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "file": {
+            "depth": 0,
+            "mime_type": "text/html",
+            "analyzer": [
+              "MD5",
+              "SHA1"
+            ],
+            "bytes": {
+              "overflow": 0,
+              "missing": 0,
+              "seen": 891
+            },
+            "local_orig": true,
+            "timed_out": false,
+            "source": "HTTP",
+            "is_orig": false
+          },
+          "@timestamp": "2026-11-25T14:16:42.530Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "43960",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "duration": 0.0004050731658935547,
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:16:55Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.file"
+          },
+          "hash": {
+            "sha1": "fa0d49705f819d948d370259428d2085a399128e",
+            "md5": "cfe398bfbf64d86085ba7db4d09d7705"
+          }
+        },
+        "sort": [
+          1795616202530
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "pTQPE6IByb7RItSiO09p",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "files.log"
+          },
+          "server": {
+            "port": "80",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134762023",
+              "path": "/nsm/zeek/logs/current/files.log",
+              "device_id": "64514"
+            },
+            "offset": 2105,
+            "id": {
+              "uid": "CpatqA3fP0QSMVSvGh",
+              "fuid": "FFUwta3DnL9xi5rkZ7"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 80,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 39538,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795616091.356959,\"fuid\":\"FFUwta3DnL9xi5rkZ7\",\"uid\":\"CpatqA3fP0QSMVSvGh\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":39538,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":80,\"source\":\"HTTP\",\"depth\":0,\"analyzers\":[\"MD5\",\"SHA1\"],\"mime_type\":\"text/html\",\"duration\":0.0,\"local_orig\":true,\"is_orig\":false,\"seen_bytes\":891,\"total_bytes\":891,\"missing_bytes\":0,\"overflow_bytes\":0,\"timedout\":false,\"md5\":\"cfe398bfbf64d86085ba7db4d09d7705\",\"sha1\":\"fa0d49705f819d948d370259428d2085a399128e\",\"community_id\":\"1:BgXWzDItbMRJn8rpGp2NHJgSuJA=\"}",
+          "network": {
+            "community_id": "1:BgXWzDItbMRJn8rpGp2NHJgSuJA="
+          },
+          "tags": [
+            "file"
+          ],
+          "pipeline": "files",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "file": {
+            "depth": 0,
+            "mime_type": "text/html",
+            "analyzer": [
+              "MD5",
+              "SHA1"
+            ],
+            "bytes": {
+              "total": 891,
+              "overflow": 0,
+              "missing": 0,
+              "seen": 891
+            },
+            "local_orig": true,
+            "timed_out": false,
+            "source": "HTTP",
+            "is_orig": false
+          },
+          "@timestamp": "2026-11-25T14:14:51.356Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39538",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "duration": 0.0,
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:14:55Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.file"
+          },
+          "hash": {
+            "sha1": "fa0d49705f819d948d370259428d2085a399128e",
+            "md5": "cfe398bfbf64d86085ba7db4d09d7705"
+          }
+        },
+        "sort": [
+          1795616091356
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "bjQJE6IByb7RItSiH0qh",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "files.log"
+          },
+          "server": {
+            "port": "8081",
+            "ip": "192.168.100.50"
+          },
+          "log": {
+            "file": {
+              "inode": "134762023",
+              "path": "/nsm/zeek/logs/current/files.log",
+              "device_id": "64514"
+            },
+            "offset": 1577,
+            "id": {
+              "uid": "CagiCp3LjAqsVzYc78",
+              "fuid": "FJYfOJ3CmEBbitegmd"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 8081,
+            "ip": "192.168.100.50"
+          },
+          "source": {
+            "port": 34137,
+            "ip": "192.168.100.188"
+          },
+          "message": "{\"ts\":1795615682.154114,\"fuid\":\"FJYfOJ3CmEBbitegmd\",\"uid\":\"CagiCp3LjAqsVzYc78\",\"id.orig_h\":\"192.168.100.188\",\"id.orig_p\":34137,\"id.resp_h\":\"192.168.100.50\",\"id.resp_p\":8081,\"source\":\"HTTP\",\"depth\":0,\"analyzers\":[\"MD5\",\"SHA1\"],\"mime_type\":\"text/html\",\"duration\":0.0,\"local_orig\":true,\"is_orig\":false,\"seen_bytes\":261,\"total_bytes\":261,\"missing_bytes\":0,\"overflow_bytes\":0,\"timedout\":false,\"md5\":\"2b27a992e6550a21ebd2755648d6c005\",\"sha1\":\"e6b9e841e98c80945d088089b708f9004c339fd8\",\"community_id\":\"1:dSoTP4FEju7NTLmgT7EPDTpr/84=\"}",
+          "network": {
+            "community_id": "1:dSoTP4FEju7NTLmgT7EPDTpr/84="
+          },
+          "tags": [
+            "file"
+          ],
+          "pipeline": "files",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "file": {
+            "depth": 0,
+            "mime_type": "text/html",
+            "analyzer": [
+              "MD5",
+              "SHA1"
+            ],
+            "bytes": {
+              "total": 261,
+              "overflow": 0,
+              "missing": 0,
+              "seen": 261
+            },
+            "local_orig": true,
+            "timed_out": false,
+            "source": "HTTP",
+            "is_orig": false
+          },
+          "@timestamp": "2026-11-25T14:08:02.154Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "34137",
+            "ip": "192.168.100.188"
+          },
+          "event": {
+            "duration": 0.0,
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:08:14Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.file"
+          },
+          "hash": {
+            "sha1": "e6b9e841e98c80945d088089b708f9004c339fd8",
+            "md5": "2b27a992e6550a21ebd2755648d6c005"
+          }
+        },
+        "sort": [
+          1795615682154
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "nzQGE6IByb7RItSiOEd7",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "files.log"
+          },
+          "server": {
+            "port": "8000",
+            "ip": "192.168.100.50"
+          },
+          "log": {
+            "file": {
+              "inode": "134762023",
+              "path": "/nsm/zeek/logs/current/files.log",
+              "device_id": "64514"
+            },
+            "offset": 1050,
+            "id": {
+              "uid": "CWhhpp377jZADiAEXg",
+              "fuid": "FNAtJm20fj23bLNQI3"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 8000,
+            "ip": "192.168.100.50"
+          },
+          "source": {
+            "port": 39281,
+            "ip": "192.168.100.188"
+          },
+          "message": "{\"ts\":1795615494.986547,\"fuid\":\"FNAtJm20fj23bLNQI3\",\"uid\":\"CWhhpp377jZADiAEXg\",\"id.orig_h\":\"192.168.100.188\",\"id.orig_p\":39281,\"id.resp_h\":\"192.168.100.50\",\"id.resp_p\":8000,\"source\":\"HTTP\",\"depth\":0,\"analyzers\":[\"MD5\",\"SHA1\"],\"mime_type\":\"text/plain\",\"duration\":0.0,\"local_orig\":true,\"is_orig\":false,\"seen_bytes\":21,\"total_bytes\":21,\"missing_bytes\":0,\"overflow_bytes\":0,\"timedout\":false,\"md5\":\"ce8321b3b04a496aa87380397f792c7d\",\"sha1\":\"23068caf35622b0d4b0d2fef11b3ebdb341dce1a\",\"community_id\":\"1:04RBQ7gRt5SmwDq6mklbVCQLdMI=\"}",
+          "network": {
+            "community_id": "1:04RBQ7gRt5SmwDq6mklbVCQLdMI="
+          },
+          "tags": [
+            "file"
+          ],
+          "pipeline": "files",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "file": {
+            "depth": 0,
+            "mime_type": "text/plain",
+            "analyzer": [
+              "MD5",
+              "SHA1"
+            ],
+            "bytes": {
+              "total": 21,
+              "overflow": 0,
+              "missing": 0,
+              "seen": 21
+            },
+            "local_orig": true,
+            "timed_out": false,
+            "source": "HTTP",
+            "is_orig": false
+          },
+          "@timestamp": "2026-11-25T14:04:54.986Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "39281",
+            "ip": "192.168.100.188"
+          },
+          "event": {
+            "duration": 0.0,
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:05:04Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.file"
+          },
+          "hash": {
+            "sha1": "23068caf35622b0d4b0d2fef11b3ebdb341dce1a",
+            "md5": "ce8321b3b04a496aa87380397f792c7d"
+          }
+        },
+        "sort": [
+          1795615494986
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "izQGE6IByb7RItSiEUdw",
+        "_score": null,
+        "_source": {
+          "container": {
+            "id": "files.log"
+          },
+          "server": {
+            "port": "80",
+            "ip": "192.168.100.188"
+          },
+          "log": {
+            "file": {
+              "inode": "134762023",
+              "path": "/nsm/zeek/logs/current/files.log",
+              "device_id": "64514"
+            },
+            "offset": 525,
+            "id": {
+              "uid": "C5N4qB2s4Ilg5L0Ht8",
+              "fuid": "FiFz8Ach0SSPTIK7h"
+            }
+          },
+          "elastic_agent": {
+            "id": "de6496ba-38b5-4ab2-b740-47f254999884",
+            "version": "9.4.5",
+            "snapshot": false
+          },
+          "destination": {
+            "port": 80,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 50694,
+            "ip": "192.168.100.50"
+          },
+          "message": "{\"ts\":1795615482.540873,\"fuid\":\"FiFz8Ach0SSPTIK7h\",\"uid\":\"C5N4qB2s4Ilg5L0Ht8\",\"id.orig_h\":\"192.168.100.50\",\"id.orig_p\":50694,\"id.resp_h\":\"192.168.100.188\",\"id.resp_p\":80,\"source\":\"HTTP\",\"depth\":0,\"analyzers\":[\"MD5\",\"SHA1\"],\"mime_type\":\"text/html\",\"duration\":0.0,\"local_orig\":true,\"is_orig\":false,\"seen_bytes\":891,\"total_bytes\":891,\"missing_bytes\":0,\"overflow_bytes\":0,\"timedout\":false,\"md5\":\"cfe398bfbf64d86085ba7db4d09d7705\",\"sha1\":\"fa0d49705f819d948d370259428d2085a399128e\",\"community_id\":\"1:7RL5K8LURh864r0ot6AMlwwJ+io=\"}",
+          "network": {
+            "community_id": "1:7RL5K8LURh864r0ot6AMlwwJ+io="
+          },
+          "tags": [
+            "file"
+          ],
+          "pipeline": "files",
+          "input": {
+            "type": "filestream"
+          },
+          "observer": {
+            "name": "shyonion"
+          },
+          "file": {
+            "depth": 0,
+            "mime_type": "text/html",
+            "analyzer": [
+              "MD5",
+              "SHA1"
+            ],
+            "bytes": {
+              "total": 891,
+              "overflow": 0,
+              "missing": 0,
+              "seen": 891
+            },
+            "local_orig": true,
+            "timed_out": false,
+            "source": "HTTP",
+            "is_orig": false
+          },
+          "@timestamp": "2026-11-25T14:04:42.540Z",
+          "ecs": {
+            "version": "8.0.0"
+          },
+          "data_stream": {
+            "namespace": "so",
+            "type": "logs",
+            "dataset": "zeek"
+          },
+          "client": {
+            "port": "50694",
+            "ip": "192.168.100.50"
+          },
+          "event": {
+            "duration": 0.0,
+            "agent_id_status": "missing",
+            "ingested": "2026-11-25T14:04:54Z",
+            "module": "zeek",
+            "category": "network",
+            "dataset": "zeek.file"
+          },
+          "hash": {
+            "sha1": "fa0d49705f819d948d370259428d2085a399128e",
+            "md5": "cfe398bfbf64d86085ba7db4d09d7705"
+          }
+        },
+        "sort": [
+          1795615482540
+        ]
+      }
+    ]
+  }
+}
