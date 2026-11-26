@@ -200,16 +200,32 @@ Metasploitable 2 là máy chủ Linux dựng sẵn để thực hành pentest v�
      ```
 
 3. **Kiểm tra dịch vụ SSH và tạo User thử nghiệm:**
-   - Metasploitable 2 đã bật sẵn SSH service (OpenSSH). Kiểm tra:
-     ```bash
-     sudo netstat -tlpn | grep :22
-     # Phải thấy 0.0.0.0:22 LISTEN
-     ```
+   - **Thực tế về OpenSSH trên Metasploitable 2:**
+     - Metasploitable 2 (Ubuntu 8.04 LTS) **đã cài sẵn OpenSSH 4.7p1** (gói `openssh-server`, tiến trình `/usr/sbin/sshd`).
+     - Vì Ubuntu 8.04 ra đời trước khi có systemd, các lệnh `systemctl` hoặc `openssh` trực tiếp sẽ báo `command not found`.
+     - Tên service trong hệ thống là **`ssh`**. Bạn kiểm tra hoặc khởi động lại bằng:
+       ```bash
+       sudo /etc/init.d/ssh status
+       sudo /etc/init.d/ssh start
+       sudo netstat -tlpn | grep :22
+       # Phải thấy 0.0.0.0:22 LISTEN
+       ```
+   - **Lưu ý tương thích thuật toán (Cryptographic Negotiation):**
+     - Do OpenSSH 4.7p1 đã rất cũ, các máy Attacker hiện đại (Kali 2024, Ubuntu 22.04/24.04, Windows 11) mặc định chặn các thuật toán cũ (`diffie-hellman-group1-sha1`, `ssh-rsa`).
+     - Khi gõ lệnh `ssh` thông thường, client hiện đại sẽ báo: `Unable to negotiate ... no matching key exchange method / host key type found`. Đây **không phải** do máy target chưa cài OpenSSH, mà do client từ chối thuật toán yếu.
+     - Lệnh SSH chuẩn để kết nối từ Attacker sang Metasploitable 2:
+       ```bash
+       ssh -oHostKeyAlgorithms=+ssh-rsa,ssh-dss -oKexAlgorithms=+diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1 -oCiphers=+aes128-cbc,3des-cbc labuser@192.168.100.188
+       ```
+     - *(Script `./src/scenarios/s2/auth_attack_simulation.sh` đã được tích hợp sẵn các cờ tương thích này)*.
    - Tạo tài khoản người dùng `labuser` để phục vụ kịch bản dò mật khẩu:
      ```bash
      sudo useradd -m -s /bin/bash labuser
      echo "labuser:Lab@123456" | sudo chpasswd
      ```
+
+   > [!TIP]
+   > **Tùy chọn thay thế (Modern Target):** Nếu bạn không muốn dùng Metasploitable 2 vì quá cũ (không cài được Elastic Agent, thuật toán mã hóa lỗi thời), bạn hoàn toàn có thể dùng bất kỳ máy ảo Linux nào (Ubuntu 22.04/24.04, Debian) gắn vào `VMnet2`, cài `openssh-server` (`sudo apt install -y openssh-server`) để làm mục tiêu cho Scenario 2. Kịch bản phát hiện trên Security Onion (Zeek SSH + Auth logs) hoạt động hoàn toàn giống nhau!
 
 4. **Giải pháp thu thập Log từ Metasploitable 2 (Host Visibility):**
    > [!NOTE]

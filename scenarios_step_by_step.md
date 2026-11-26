@@ -292,9 +292,13 @@ Web SOC: https://192.168.182.10
 
 ## 2.3. Các bước thực hiện trên VMware
 
-1. **Chuẩn bị Metasploitable 2:**
+1. **Chuẩn bị Máy mục tiêu SSH (Metasploitable 2 hoặc Ubuntu VM):**
    - Nối card mạng vào **`VMnet2`** (Custom / Isolated Lab).
-   - Đặt IP tĩnh `192.168.100.188/24` trong `/etc/network/interfaces`.
+   - Đặt IP tĩnh `192.168.100.188/24` trong `/etc/network/interfaces` (hoặc Netplan).
+   - **Lưu ý về OpenSSH:**
+     - Trên Metasploitable 2 (Ubuntu 8.04 cũ), OpenSSH 4.7p1 đã cài sẵn nhưng chạy qua init script: `sudo /etc/init.d/ssh status` (không có `systemctl`).
+     - Khi kết nối từ Kali/Attacker hiện đại, do thuật toán mã hóa của OpenSSH 4.7p1 đã cũ, cần chỉ định thuật toán tương thích hoặc dùng script `./src/scenarios/s2/auth_attack_simulation.sh`.
+     - *(Tùy chọn: Bạn có thể dùng một máy ảo Ubuntu Server 22.04/24.04 hiện đại làm mục tiêu thay cho Metasploitable 2 nếu muốn có OpenSSH mới và cài được Elastic Agent)*.
    - Kiểm tra SSH đang lắng nghe: `sudo netstat -tlpn | grep :22`.
    - Tạo user kiểm thử:
      ```bash
