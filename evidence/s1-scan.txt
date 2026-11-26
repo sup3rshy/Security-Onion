@@ -1,0 +1,20 @@
+# Nmap 7.99 scan initiated Wed Nov 25 09:00:56 2026 as: /usr/lib/nmap/nmap -sS -Pn -p 1-1000 -T3 --reason -oN s1-scan.txt -oG s1-scan.gnmap 192.168.100.188
+Nmap scan report for 192.168.100.188
+Host is up, received arp-response (0.0023s latency).
+Not shown: 988 closed tcp ports (reset)
+PORT    STATE SERVICE      REASON
+21/tcp  open  ftp          syn-ack ttl 64
+22/tcp  open  ssh          syn-ack ttl 64
+23/tcp  open  telnet       syn-ack ttl 64
+25/tcp  open  smtp         syn-ack ttl 64
+53/tcp  open  domain       syn-ack ttl 64
+80/tcp  open  http         syn-ack ttl 64
+111/tcp open  rpcbind      syn-ack ttl 64
+139/tcp open  netbios-ssn  syn-ack ttl 64
+445/tcp open  microsoft-ds syn-ack ttl 64
+512/tcp open  exec         syn-ack ttl 64
+513/tcp open  login        syn-ack ttl 64
+514/tcp open  shell        syn-ack ttl 64
+MAC Address: 00:0C:29:8B:D6:2E (VMware)
+
+# Nmap done at Wed Nov 25 09:00:57 2026 -- 1 IP address (1 host up) scanned in 0.47 seconds

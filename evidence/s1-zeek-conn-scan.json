@@ -1,0 +1,129 @@
+{
+  "took": 22,
+  "timed_out": false,
+  "_shards": {
+    "total": 4,
+    "successful": 4,
+    "skipped": 2,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 1031,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "jzQCE6IByb7RItSiZj-l",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "port": 0,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 8,
+            "ip": "192.168.100.50"
+          },
+          "network": {
+            "transport": "icmp"
+          },
+          "@timestamp": "2026-11-25T13:59:44.540Z"
+        },
+        "sort": [
+          1795615184540
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "hDQBE6IByb7RItSipj5D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "port": 80,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 40738,
+            "ip": "192.168.100.50"
+          },
+          "network": {
+            "transport": "tcp"
+          },
+          "@timestamp": "2026-11-25T13:59:46.575Z"
+        },
+        "sort": [
+          1795615186575
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "iTQBE6IByb7RItSipj5D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "port": 22,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 54720,
+            "ip": "192.168.100.50"
+          },
+          "network": {
+            "transport": "tcp"
+          },
+          "@timestamp": "2026-11-25T13:59:46.787Z"
+        },
+        "sort": [
+          1795615186787
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "9TQCE6IByb7RItSixT9U",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "port": 111,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 60261,
+            "ip": "192.168.100.50"
+          },
+          "network": {
+            "transport": "tcp"
+          },
+          "@timestamp": "2026-11-25T14:00:57.314Z"
+        },
+        "sort": [
+          1795615257314
+        ]
+      },
+      {
+        "_index": ".ds-logs-zeek-so-2026.11.24-000002",
+        "_id": "8zQCE6IByb7RItSixT9U",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "port": 113,
+            "ip": "192.168.100.188"
+          },
+          "source": {
+            "port": 60261,
+            "ip": "192.168.100.50"
+          },
+          "network": {
+            "transport": "tcp"
+          },
+          "@timestamp": "2026-11-25T14:00:57.315Z"
+        },
+        "sort": [
+          1795615257315
+        ]
+      }
+    ]
+  }
+}

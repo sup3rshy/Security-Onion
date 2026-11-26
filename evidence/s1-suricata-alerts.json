@@ -1,0 +1,249 @@
+{
+  "took": 6,
+  "timed_out": false,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "skipped": 1,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 17,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "RjQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "ET HUNTING curl User-Agent to Dotted Quad"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:16:42.531Z",
+          "event": {
+            "severity": 2
+          }
+        },
+        "sort": [
+          1795616202531
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "RDQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "ET SCAN Potential SSH Scan"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:16:42.256Z",
+          "event": {
+            "severity": 2
+          }
+        },
+        "sort": [
+          1795616202256
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "RTQRE6IByb7RItSiEFGt",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "ET SCAN Potential SSH Scan OUTBOUND"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:16:42.256Z",
+          "event": {
+            "severity": 2
+          }
+        },
+        "sort": [
+          1795616202256
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "vzQPE6IByb7RItSiYk-D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "ET HUNTING curl User-Agent to Dotted Quad"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:14:51.357Z",
+          "event": {
+            "severity": 2
+          }
+        },
+        "sort": [
+          1795616091357
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "vjQPE6IByb7RItSiYk-D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "GPL ICMP PING *NIX"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:14:51.302Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795616091302
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "vTQPE6IByb7RItSiYk-D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "GPL ICMP PING *NIX"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:14:50.287Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795616090287
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "vDQPE6IByb7RItSiYk-D",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "GPL ICMP PING *NIX"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:14:50.279Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795616090279
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "sDQOE6IByb7RItSiAk6_",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "GPL ICMP PING *NIX"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:13:29.415Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795616009415
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "rzQOE6IByb7RItSiAk6_",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "GPL ICMP PING *NIX"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:13:28.397Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795616008397
+        ]
+      },
+      {
+        "_index": ".ds-logs-suricata.alerts-so-2026.11.24-000002",
+        "_id": "mDQGE6IByb7RItSiOEd7",
+        "_score": null,
+        "_source": {
+          "destination": {
+            "ip": "192.168.100.188"
+          },
+          "rule": {
+            "name": "ET INFO Python SimpleHTTP ServerBanner"
+          },
+          "source": {
+            "ip": "192.168.100.50"
+          },
+          "@timestamp": "2026-11-25T14:04:54.986Z",
+          "event": {
+            "severity": 1
+          }
+        },
+        "sort": [
+          1795615494986
+        ]
+      }
+    ]
+  }
+}

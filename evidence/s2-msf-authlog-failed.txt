@@ -1,0 +1,8 @@
+Oct 14 14:10:33 metasploitable sshd[5542]: Failed password for msfadmin from 192.168.182.1 port 1584 ssh2
+Nov 25 09:02:36 metasploitable sshd[5303]: Failed password for labuser from 192.168.100.50 port 33970 ssh2
+Nov 25 09:02:50 metasploitable sshd[5305]: Failed password for labuser from 192.168.100.50 port 38102 ssh2
+Nov 25 09:03:05 metasploitable sshd[5308]: Failed password for labuser from 192.168.100.50 port 41080 ssh2
+Nov 25 09:03:19 metasploitable sshd[5310]: Failed password for labuser from 192.168.100.50 port 36720 ssh2
+Nov 25 09:03:33 metasploitable sshd[5312]: Failed password for labuser from 192.168.100.50 port 60370 ssh2
+Nov 25 09:03:47 metasploitable sshd[5314]: Failed password for labuser from 192.168.100.50 port 50954 ssh2
+

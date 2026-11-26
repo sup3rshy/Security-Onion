@@ -6,14 +6,16 @@ Tài liệu đi kèm `Readme.md`, dùng để ghi nhận kết quả thực nghi
 
 **Chỉ thực hiện kiểm thử trên các máy và mạng lab thuộc quyền quản lý.** Không quét mạng bên ngoài hoặc chạy script khai thác.
 
-| Scenario | Nội dung | Trạng thái thực tế |
+| Scenario | Nội dung | Trạng thái (sau phiên 2026-11-25, VMware) |
 |---|---|---|
-| 1 | Network Scanning | Đã xác minh Metasploitable scan → mirror → Zeek `zeek.conn` trong Hunt (1000 events, source `192.168.100.1`, target `192.168.100.188`); chưa xác minh Suricata alert, PCAP qua SOC và Case |
-| 2 | Authentication Attack Simulation | Chưa thực hiện trong phiên này |
-| 3 | Suspicious Web Activity | Chưa thực hiện trong phiên này |
-| 4 | Endpoint Detection | Chưa thực hiện trong phiên này |
-| 5 | File Transfer + PCAP Investigation | Chưa thực hiện trong phiên này |
-| 6 | Honeypot | Chưa thực hiện trong phiên này |
+| 1 | Network Scanning | ✅ Đã chạy lại đầy đủ trên VMware: 12 cổng mở, `zeek.conn` 1001 cổng đích khác nhau, PCAP 1.993 packet, Suricata có alert liên quan scan (ET SCAN Potential SSH Scan). Chi tiết §7.1 |
+| 2 | Authentication Attack Simulation | ✅ 6 lần sai mật khẩu SSH từ `192.168.100.50`; Zeek `zeek.ssh` + auth.log trên target đều xác nhận. Chi tiết §7.2 |
+| 3 | Suspicious Web Activity | ✅ `zeek.http` ghi đủ method/URI/User-Agent/status của cả request 404 có marker và request UA `SO-LAB-TEST`. Chi tiết §7.3 |
+| 4 | Endpoint Detection | ⚠️ **Chưa hoàn tất** — chặn ở firewall Fleet (8220) và không có endpoint Windows có quyền admin. Đã xác minh hạ tầng Fleet + enrollment token tồn tại. Chi tiết §7.4 |
+| 5 | File Transfer + PCAP Investigation | ✅ Truyền `lab-test.txt` qua HTTP, hash hai đầu khớp, `zeek.http` + `zeek.file` có bằng chứng. Chi tiết §7.5 |
+| 6 | Honeypot | ✅ OpenCanary (SSH 2222 + HTTP 8081) bị kết nối từ `192.168.100.188`; log canary + `zeek.http` xác nhận. Chi tiết §7.6 |
+
+> Phiên 2026-11-25 chạy trên **VMware Workstation** thay cho KVM; môi trường, IP và sai khác so với tài liệu cũ ghi ở §7.0. Bằng chứng thô lưu trong `evidence/`.
 
 Các mục hướng dẫn bên dưới không đồng nghĩa với việc đã thực hiện thành công. Chỉ đánh dấu hoàn thành khi có bằng chứng tương ứng.
 
@@ -91,7 +93,7 @@ sudo so-status
 Điều kiện để tiếp tục:
 - `enp1s0` có `192.168.122.10/24`.
 - NIC sniffing `enp7s0` không có IP.
-- Suricata và Zeek hoạt động; SOC truy cập được qua `https://192.168.122.10`.
+- Suricata và Zeek hoạt động; SOC truy cập được qua `https://192.168.122.10` (trên Security Onion 3.3, quản lý quyền truy cập qua `sudo so-firewall includehost analyst <IP_or_CIDR> --apply`).
 
 **Trên host Kali:**
 
@@ -215,3 +217,177 @@ Nếu trường có mặt, kiểm tra `zeek.conn.conn_state`. `S0` thường là
 **Lưu ý:** biểu tượng tam giác xanh trong Hunt không phải bằng chứng đã có alert Suricata.
 
 ---
+
+---
+
+# 7. Kết quả thực nghiệm 2026-11-25 — VMware Workstation
+
+## 7.0. Môi trường thực tế và sai khác so với tài liệu cũ
+
+| Thành phần | Giá trị thực tế |
+|---|---|
+| Hypervisor | VMware Workstation (host Windows), điều khiển từ WSL2 |
+| Security Onion | 3.3.0, Oracle Linux 9.8, kernel 6.12 UEK, standalone |
+| NIC quản lý SO | `ens160` — 192.168.182.10/24 (VMnet8 NAT), GW 192.168.182.2 |
+| NIC sniffing SO | `ens224` (KHÔNG IP) → enslaved vào `bond0`, `PROMISC` |
+| Attacker | VM Kali `192.168.100.50/24` (eth1 = VMnet2), eth0 = VMnet8 192.168.182.60 |
+| Target | Metasploitable 2 `192.168.100.188/24` (eth0 = VMnet2) |
+| Mạng lab | VMnet2 (custom, không có adapter trên host) |
+| Mạng quản trị | VMnet8 (NAT, 192.168.182.0/24) |
+
+Sai khác cần ghi rõ khi báo cáo:
+
+1. **Tên NIC đổi** so với tài liệu KVM: `ens33/ens34` → `ens160/ens224`; NIC sniffing nằm trong `bond0` (đúng mô hình capture bond của SO).
+2. **Không cần `tc mirred` trên VMware.** VMnet2 hoạt động như hub ảo: NIC `ens224` ở chế độ `PROMISC` nhận được toàn bộ unicast giữa hai VM cùng vnet. Đã kiểm chứng bằng `tcpdump -i bond0` thấy ARP/ICMP/HTTP/SSH giữa .50 và .188.
+3. **Không dùng DHCP cho mạng lab.** VMnet2 có DHCP riêng ở dải `10.81.23.0/24`, nên hai máy lab đặt IP tĩnh `192.168.100.0/24` để khớp tài liệu (cùng L2, khác subnet DHCP không ảnh hưởng).
+4. **Attacker là VM Kali**, không phải máy host, nên toàn bộ traffic đi qua VMnet2 và sensor nhìn thấy.
+5. **Bằng chứng Hunt lấy trực tiếp từ Elasticsearch** bằng `so-elasticsearch-query` trên SO (cùng index/pipeline mà giao diện Hunt dùng), không phụ thuộc thao tác tay trên UI. File JSON thô lưu ở `evidence/`.
+
+## 7.1. Scenario 1 — Network Scanning (T1046) ✅
+
+**Lệnh chạy (Kali):**
+
+```bash
+date -Is
+sudo nmap -sS -Pn -p 1-1000 -T3 --reason 192.168.100.188 -oN s1-scan.txt -oG s1-scan.gnmap
+```
+
+**Bước 0 — xác nhận sensor thấy traffic trước khi scan:** `tcpdump -nn -i bond0 'host 192.168.100.188'` thấy ARP, ICMP và TCP SYN của kết nối thử.
+
+**Kết quả nmap:** host up (arp-response), **12 cổng mở** — 21/ftp, 22/ssh, 23/telnet, 25/smtp, 53/domain, 80/http, 111/rpcbind, 139/netbios-ssn, 445/microsoft-ds, 512/exec, 513/login, 514/shell; 988 cổng closed; thời gian quét 0,47 s.
+
+**Bằng chứng từng lớp:**
+
+| Lớp | Kết quả |
+|---|---|
+| PCAP (`s1-capture.pcap`) | 1.993 packet trong cửa sổ quét, thấy SYN tới nhiều cổng liên tiếp |
+| Zeek `zeek.conn` | **1.031** bản ghi tới 192.168.100.188 (180 phút); trong cửa sổ 25 phút: **904** conn, **1.001 cổng đích khác nhau**, toàn bộ từ `192.168.100.50` |
+| Suricata | 17 alert/180 phút: `GPL ICMP PING *NIX` ×5, `ET HUNTING curl User-Agent to Dotted Quad` ×2, **`ET SCAN Potential SSH Scan`** ×1, `ET SCAN Potential SSH Scan OUTBOUND` ×1, `ET INFO Python SimpleHTTP ServerBanner` ×1 |
+
+**Kết luận đúng bản chất:** **không có** signature dạng "nmap SYN scan" trong ruleset đang bật, nên không được ghi "Suricata phát hiện nmap". Bằng chứng quyết định là **Zeek conn với 1.001 cổng đích khác nhau trong vài giây** + PCAP có SYN tương ứng. Alert `ET SCAN Potential SSH Scan` chỉ là tín hiệu phụ (nhiều lần chạm cổng 22), không phải kết luận của scenario.
+
+**Artifact:** `evidence/s1-scan.txt`, `s1-scan.gnmap`, `s1-capture.pcap`, `s1-zeek-conn-scan.json`, `s1-suricata-alerts.json`.
+
+## 7.2. Scenario 2 — SSH Authentication Attack (T1110.001) ✅
+
+**Thực hiện:** dùng chính script của đồ án `src/scenarios/s2/auth_attack_simulation.sh 192.168.100.188 labuser` trên Kali. Hydra 9.7 **không dùng được** (OpenSSH 4.7p1 chỉ offer `hmac-md5/hmac-sha1`, client chỉ có `hmac-sha2-*` → `kex error: no match for method mac`). Script có fallback **paramiko** nên vẫn chạy được 6 lần thử.
+
+**Kết quả:** 6/6 thất bại (123456, password, admin123, toor2024, letmein, wrongpass1).
+
+**Bằng chứng 2 phía:**
+
+| Nguồn | Bằng chứng |
+|---|---|
+| Mạng (Zeek) | `zeek.ssh`: 22 bản ghi, toàn bộ `source.ip = 192.168.100.50`, `destination.ip = 192.168.100.188`; `zeek.conn` tới cổng 22 tăng tương ứng |
+| Host (target) | `/var/log/auth.log`: **6 dòng** `Failed password for labuser from 192.168.100.50 port ... ssh2` (02:49:36 → 02:49:47) kèm `pam_unix(sshd:auth): authentication failure` |
+
+**Điểm nhấn giữ nguyên giá trị:** Zeek chỉ thấy kết nối + banner, **không giải mã được payload**; muốn biết username bị dò và kết quả đăng nhập phải có auth.log của endpoint — đúng luận điểm §2.4.
+
+**Artifact:** `evidence/scenario2-auth-attack.log`, `s2-zeek-ssh.json`, `s2-msf-authlog-failed.txt`.
+
+## 7.3. Scenario 3 — Suspicious Web Activity ✅
+
+**Thực hiện (Kali → Apache 2.2.8 trên Metasploitable):**
+
+```bash
+curl -i "http://192.168.100.188/does-not-exist?lab=SO-SCENARIO3"
+curl -i -A "SO-LAB-TEST" "http://192.168.100.188/"
+```
+
+**Bằng chứng `zeek.http` (14:04:42 UTC):**
+
+| method | uri | user-agent | status | virtual_host |
+|---|---|---|---|---|
+| GET | `/does-not-exist?lab=SO-SCENARIO3` | `curl/8.20.0` | 404 | 192.168.100.188 |
+| GET | `/` | `SO-LAB-TEST` | 200 | 192.168.100.188 |
+
+Analyst trả lời được đủ: **ai gọi, gọi cái gì, bằng UA nào, kết quả ra sao** — chỉ từ metadata, không cần đọc payload. Marker vô hại, không có khai thác SQLi/XSS.
+
+**Artifact:** `evidence/s3-zeek-http-markers.json`.
+
+## 7.4. Scenario 4 — Endpoint Detection (T1059.001 / T1082) ⚠️ CHƯA HOÀN TẤT
+
+**Đã xác minh được:**
+
+- `so-elastic-fleet` chạy bình thường, Fleet Server listen `0.0.0.0:8220` (docker-proxy).
+- Tồn tại 4 enrollment API key trong `.fleet-enrollment-api-keys`: `FleetServer_shyonion`, **`endpoints-initial`**, `so-grid-nodes_general`, `so-grid-nodes_heavy` → policy cho endpoint đã có sẵn.
+- Đã chạy `sudo so-firewall includehost fleet 192.168.182.0/24 --apply` → "Successfully applied firewall changes".
+
+**Chỗ chặn (đã kiểm tra, không phải suy đoán):**
+
+1. **Port 8220 vẫn không truy cập được** từ Kali (`curl -k https://192.168.182.10:8220/api/status` → `http=000`) và từ WSL (`/dev/tcp` closed), trong khi 443 mở. `nft ruleset` có DNAT `tcp dport 8220 → 172.17.1.21:8220` nhưng counter accept vẫn 0 → hostgroup `fleet` chưa thực sự mở chiều vào.
+2. **Không có phiên SOC admin** để lấy lệnh cài agent từ UI: `so-user password --email shy@gmail.com` bị từ chối với cả mật khẩu 14 và 18 ký tự đủ 4 lớp ("Password does not meet the minimum requirements"). Cần mật khẩu SOC cũ hoặc chỉnh policy qua `so-user valpass`.
+3. **Không có endpoint Windows có quyền admin** để cài Sysmon + Elastic Agent. VM `Windows 10 x64` có trong máy nhưng không có thông tin đăng nhập/quyền quản trị.
+
+**Để hoàn tất cần:** (a) mở được 8220 cho dải 192.168.182.0/24 (kiểm tra lại hostgroup + `so-firewall apply`), (b) mật khẩu SOC của `shy@gmail.com`, (c) một endpoint Windows có admin. Khi có đủ, các bước còn lại giữ nguyên như `scenarios_step_by_step.md` §4.3.
+
+**Không đánh dấu hoàn thành** vì chưa có bằng chứng process-creation trong Hunt.
+
+## 7.5. Scenario 5 — File Transfer + PCAP ✅
+
+**Thực hiện:**
+
+```bash
+# Host A (Kali 192.168.100.50)
+printf 'SO-LAB-FILE-TRANSFER\n' > lab-test.txt
+sha256sum lab-test.txt
+python3 -m http.server 8000 --directory /tmp/s5
+
+# Host B (Metasploitable 192.168.100.188)
+wget http://192.168.100.50:8000/lab-test.txt
+sha256sum lab-test.txt
+```
+
+**Hash khớp hai đầu:** `5ab59ed93f7282386eeb1df7e40ea22a4f14b82f44b5948dcf7675ceefc97e3c` (21 byte).
+
+**Bằng chứng Zeek:**
+
+- `zeek.http`: `GET /lab-test.txt`, status 200, UA `Wget/1.10.2`, 192.168.100.188:39281 → 192.168.100.50:8000, `resp_mime_types: text/plain`, `resp_fuids: FNAtJm20fj23bLNQI3`.
+- `zeek.file`: `mime_type text/plain`, `seen_bytes 21`, **MD5 `ce8321b3b04a496aa87380397f792c7d`**, **SHA1 `23068caf35622b0d4b0d2fef11b3ebdb341dce1a`**, `source: HTTP`, fuid khớp `resp_fuids` của bản ghi HTTP.
+
+**Lưu ý kỹ thuật:** Zeek tính **MD5/SHA1**, không tính SHA256; muốn đối chiếu SHA256 phải lấy từ host (như đã làm). Đây là lý do phải ghi cả hai loại hash.
+
+**Artifact:** `evidence/s5-zeek-file.json`.
+
+## 7.6. Scenario 6 — Honeypot (OpenCanary) ✅
+
+**Triển khai:** OpenCanary (venv `/opt/canary`) trên Kali, `node_id = lab-canary-01`, giả lập **SSH trên 2222** (banner `SSH-2.0-OpenSSH_7.9p1`) và **HTTP trên 8081**, log JSON ra `/var/log/opencanary.log`.
+
+**Kết nối thử từ Metasploitable:**
+
+```bash
+nc -v -z -w2 192.168.100.50 2222
+wget http://192.168.100.50:8081/admin.php
+```
+
+**Bằng chứng:**
+
+| Nguồn | Nội dung |
+|---|---|
+| Log canary (SSH) | `logtype 4000` (SSH connection): `src_host 192.168.100.188`, `src_port 43437`, `dst_port 2222`, `node_id lab-canary-01` |
+| Log canary (HTTP) | `"192.168.100.188" - - "GET /admin.php HTTP/1.0" 404 "-" "Wget/1.10.2"` |
+| Zeek | `zeek.http`: GET `/admin.php`, status 404, UA `Wget/1.10.2`, src 192.168.100.188, **dst port 8081** |
+
+Honeypot giảm nhiễu đúng lý thuyết: không có lý do hợp lệ nào để một máy trong lab kết nối tới 2222/8081 của canary, nên một kết nối duy nhất đã đáng điều tra.
+
+**Artifact:** `evidence/s6-zeek-http-canary.json` (+ log canary trích trong báo cáo này).
+
+## 7.7. Cases
+
+Chưa tạo Case trong SOC UI ở phiên này (cần phiên đăng nhập SOC — xem §7.4 mục 2 — và thao tác UI). Nội dung Case đề xuất, đã đủ bằng chứng để điền:
+
+| Case | Title | Source → Target | Disposition |
+|---|---|---|---|
+| 1 | LAB Scenario 1 — Network Service Scanning | 192.168.100.50 → 192.168.100.188 | Authorized lab activity |
+| 2 | LAB Scenario 2 — SSH Brute Force | 192.168.100.50 → 192.168.100.188:22 | Authorized lab activity |
+| 3 | LAB Scenario 3 — Suspicious Web Activity | 192.168.100.50 → 192.168.100.188:80 | Authorized lab activity |
+| 5 | LAB Scenario 5 — File Transfer | 192.168.100.50:8000 → 192.168.100.188 | Authorized lab activity |
+| 6 | LAB Scenario 6 — Honeypot Hit | 192.168.100.188 → 192.168.100.50:2222/8081 | Authorized lab activity |
+
+## 7.8. Trạng thái lab bàn giao
+
+- **IP tĩnh đã bền vững sau reboot** (đã test thật): Kali dùng unit `lab-net.service` (eth0 .60 / eth1 .50 + default route + DNS); Metasploitable dùng `/etc/network/interfaces` (eth0 .188). ssh/apache của target bật ở boot.
+- Mật khẩu OS của SO và của VM lab đã được đặt lại trong phiên này — **không ghi vào repo**, xem ghi chú bàn giao ngoài repo.
+- Snapshot `before-passwd-reset` vẫn còn trên VM `secOnion`; xoá bằng `vmrun -T ws deleteSnapshot` khi đã chắc chắn.
+- Console VNC không mật khẩu vẫn bật trên `kali` (5903) và `Metasploitable` (5902) để tiện thao tác lab; chỉ truy cập được từ chính máy host (Windows firewall chặn từ ngoài). Gỡ bằng cách xoá 2 dòng `RemoteDisplay.vnc.*` trong file .vmx khi máy đang tắt.
+- OpenCanary và HTTP server của Scenario 5 chạy dạng tiến trình tạm, đã dừng sau reboot; chạy lại theo §7.6 và §7.5 khi cần demo.
