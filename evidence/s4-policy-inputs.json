@@ -1,0 +1,1427 @@
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 7,
+      "relation": "eq"
+    },
+    "max_score": 1.293921,
+    "hits": [
+      {
+        "_index": ".fleet-policies-7",
+        "_id": "54dcb2bb-72ec-5379-a7ae-842dce0ecf28",
+        "_score": 1.293921,
+        "_source": {
+          "@timestamp": "2026-10-19T14:13:58.139Z",
+          "revision_idx": 8,
+          "coordinator_idx": 0,
+          "namespaces": [
+            "default"
+          ],
+          "data": {
+            "id": "endpoints-initial",
+            "outputs": {
+              "default": {
+                "type": "elasticsearch",
+                "hosts": [
+                  "https://shyonion:9200"
+                ],
+                "ssl.ca_trusted_fingerprint": "CCAE11D37ACA803EE2F2E03CAC29AA78F241599B39DF76D591DD813F7849698B",
+                "preset": "balanced"
+              }
+            },
+            "inputs": [
+              {
+                "id": "winlog-windows-8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                "revision": 1,
+                "name": "windows-endpoints",
+                "type": "winlog",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                "streams": [
+                  {
+                    "id": "winlog-windows.forwarded-8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "windows.forwarded"
+                    },
+                    "name": "ForwardedEvents",
+                    "condition": "${host.platform} == 'windows'",
+                    "ignore_older": "72h",
+                    "tags": [
+                      "forwarded"
+                    ],
+                    "publisher_pipeline.disable_host": true,
+                    "processors": [
+                      {
+                        "translate_sid": {
+                          "field": "winlog.event_data.MemberSid",
+                          "account_name_target": "winlog.event_data._MemberUserName",
+                          "domain_target": "winlog.event_data._MemberDomain",
+                          "account_type_target": "winlog.event_data._MemberAccountType",
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      },
+                      {
+                        "decode_xml": {
+                          "when": {
+                            "and": [
+                              {
+                                "has_fields": [
+                                  "winlog.event_data.TaskContent"
+                                ]
+                              },
+                              {
+                                "equals": {
+                                  "winlog.provider_name": "Microsoft-Windows-Security-Auditing"
+                                }
+                              },
+                              {
+                                "regexp": {
+                                  "winlog.channel": "^[Ss][Ee][Cc][Uu][Rr][Ii][Tt][Yy]$"
+                                }
+                              }
+                            ]
+                          },
+                          "field": "winlog.event_data.TaskContent",
+                          "target_field": "winlog._tmp.scheduled_task.task_content",
+                          "to_lower": true,
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      },
+                      {
+                        "decode_xml": {
+                          "when": {
+                            "and": [
+                              {
+                                "has_fields": [
+                                  "winlog.event_data.TaskContentNew"
+                                ]
+                              },
+                              {
+                                "equals": {
+                                  "winlog.provider_name": "Microsoft-Windows-Security-Auditing"
+                                }
+                              },
+                              {
+                                "regexp": {
+                                  "winlog.channel": "^[Ss][Ee][Cc][Uu][Rr][Ii][Tt][Yy]$"
+                                }
+                              }
+                            ]
+                          },
+                          "field": "winlog.event_data.TaskContentNew",
+                          "target_field": "winlog._tmp.scheduled_task.task_content_new",
+                          "to_lower": true,
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "winlog-windows.powershell-8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "windows.powershell"
+                    },
+                    "name": "Windows PowerShell",
+                    "condition": "${host.platform} == 'windows'",
+                    "event_id": "400, 403, 600, 800",
+                    "ignore_older": "72h",
+                    "processors": [
+                      {
+                        "translate_sid": {
+                          "field": "winlog.event_data.MemberSid",
+                          "account_name_target": "winlog.event_data._MemberUserName",
+                          "domain_target": "winlog.event_data._MemberDomain",
+                          "account_type_target": "winlog.event_data._MemberAccountType",
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "winlog-windows.powershell_operational-8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "windows.powershell_operational"
+                    },
+                    "name": "Microsoft-Windows-PowerShell/Operational",
+                    "condition": "${host.platform} == 'windows'",
+                    "event_id": "4103, 4104, 4105, 4106",
+                    "ignore_older": "72h",
+                    "processors": [
+                      {
+                        "translate_sid": {
+                          "field": "winlog.event_data.MemberSid",
+                          "account_name_target": "winlog.event_data._MemberUserName",
+                          "domain_target": "winlog.event_data._MemberDomain",
+                          "account_type_target": "winlog.event_data._MemberAccountType",
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "winlog-windows.sysmon_operational-8af6e795-2ff2-42fd-b067-72e179c4ad41",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "windows.sysmon_operational"
+                    },
+                    "name": "Microsoft-Windows-Sysmon/Operational",
+                    "condition": "${host.platform} == 'windows'",
+                    "ignore_older": "72h",
+                    "processors": [
+                      {
+                        "translate_sid": {
+                          "field": "winlog.event_data.MemberSid",
+                          "account_name_target": "winlog.event_data._MemberUserName",
+                          "domain_target": "winlog.event_data._MemberDomain",
+                          "account_type_target": "winlog.event_data._MemberAccountType",
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "windows",
+                    "version": "3.9.0",
+                    "policy_template": "windows",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "logfile-system-2f9664b6-036f-4521-ba33-abe637125ede",
+                "revision": 1,
+                "name": "system-endpoints",
+                "type": "logfile",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "2f9664b6-036f-4521-ba33-abe637125ede",
+                "streams": [
+                  {
+                    "id": "logfile-system.auth-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.auth"
+                    },
+                    "condition": "(${host.platform} != \"windows\") and (${host.os_version} != \"12 (bookworm)\" and ${host.os_version} != \"13 (trixie)\" and (${host.os_platform} != \"amzn\" or ${host.os_version} != \"2023\") and (${host.os_platform} != \"sles\" or (${host.os_version} != \"15 SP1\" and ${host.os_version} != \"15-SP1\" and ${host.os_version} != \"15 SP2\" and ${host.os_version} != \"15-SP2\" and ${host.os_version} != \"15 SP3\" and ${host.os_version} != \"15-SP3\" and ${host.os_version} != \"15 SP4\" and ${host.os_version} != \"15-SP4\" and ${host.os_version} != \"15 SP5\" and ${host.os_version} != \"15-SP5\" and ${host.os_version} != \"15 SP6\" and ${host.os_version} != \"15-SP6\" and ${host.os_version} != \"15 SP7\" and ${host.os_version} != \"15-SP7\" and ${host.os_version} != \"16.0\")))",
+                    "ignore_older": "72h",
+                    "paths": [
+                      "/var/log/auth.log*",
+                      "/var/log/secure*"
+                    ],
+                    "exclude_files": [
+                      "\\.gz$"
+                    ],
+                    "multiline": {
+                      "pattern": "^\\s",
+                      "match": "after"
+                    },
+                    "tags": [
+                      "system-auth"
+                    ],
+                    "allow_deprecated_use": true,
+                    "processors": [
+                      {
+                        "add_locale": null
+                      },
+                      {
+                        "rename": {
+                          "fields": [
+                            {
+                              "from": "message",
+                              "to": "event.original"
+                            }
+                          ],
+                          "ignore_missing": true,
+                          "fail_on_error": false
+                        }
+                      },
+                      {
+                        "syslog": {
+                          "field": "event.original",
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "logfile-system.syslog-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.syslog"
+                    },
+                    "condition": "(${host.platform} != \"windows\") and (${host.os_version} != \"12 (bookworm)\" and ${host.os_version} != \"13 (trixie)\" and (${host.os_platform} != \"amzn\" or ${host.os_version} != \"2023\") and (${host.os_platform} != \"sles\" or (${host.os_version} != \"15 SP1\" and ${host.os_version} != \"15-SP1\" and ${host.os_version} != \"15 SP2\" and ${host.os_version} != \"15-SP2\" and ${host.os_version} != \"15 SP3\" and ${host.os_version} != \"15-SP3\" and ${host.os_version} != \"15 SP4\" and ${host.os_version} != \"15-SP4\" and ${host.os_version} != \"15 SP5\" and ${host.os_version} != \"15-SP5\" and ${host.os_version} != \"15 SP6\" and ${host.os_version} != \"15-SP6\" and ${host.os_version} != \"15 SP7\" and ${host.os_version} != \"15-SP7\" and ${host.os_version} != \"16.0\")))",
+                    "paths": [
+                      "/var/log/messages*",
+                      "/var/log/syslog*",
+                      "/var/log/system*"
+                    ],
+                    "exclude_files": [
+                      "\\.gz$"
+                    ],
+                    "multiline": {
+                      "pattern": "^\\s",
+                      "match": "after"
+                    },
+                    "processors": [
+                      {
+                        "add_locale": null
+                      }
+                    ],
+                    "allow_deprecated_use": true,
+                    "tags": null,
+                    "ignore_older": "72h"
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "system",
+                    "version": "2.22.3",
+                    "policy_template": "system",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "journald-system-2f9664b6-036f-4521-ba33-abe637125ede",
+                "revision": 1,
+                "name": "system-endpoints",
+                "type": "journald",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "2f9664b6-036f-4521-ba33-abe637125ede",
+                "streams": [
+                  {
+                    "id": "journald-system.auth-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.auth"
+                    },
+                    "type": "journald",
+                    "facilities": [
+                      4,
+                      10
+                    ],
+                    "condition": "(${host.platform} != \"windows\") and (${host.os_version} == \"12 (bookworm)\" or ${host.os_version} == \"13 (trixie)\" or (${host.os_platform} == \"amzn\" and ${host.os_version} == \"2023\") or (${host.os_platform} == \"sles\" and (${host.os_version} == \"15 SP1\" or ${host.os_version} == \"15-SP1\" or ${host.os_version} == \"15 SP2\" or ${host.os_version} == \"15-SP2\" or ${host.os_version} == \"15 SP3\" or ${host.os_version} == \"15-SP3\" or ${host.os_version} == \"15 SP4\" or ${host.os_version} == \"15-SP4\" or ${host.os_version} == \"15 SP5\" or ${host.os_version} == \"15-SP5\" or ${host.os_version} == \"15 SP6\" or ${host.os_version} == \"15-SP6\" or ${host.os_version} == \"15 SP7\" or ${host.os_version} == \"15-SP7\" or ${host.os_version} == \"16.0\")))",
+                    "tags": null
+                  },
+                  {
+                    "id": "journald-system.syslog-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.syslog"
+                    },
+                    "type": "journald",
+                    "facilities": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9,
+                      11,
+                      12,
+                      15
+                    ],
+                    "condition": "(${host.platform} != \"windows\") and (${host.os_version} == \"12 (bookworm)\" or ${host.os_version} == \"13 (trixie)\" or (${host.os_platform} == \"amzn\" and ${host.os_version} == \"2023\") or (${host.os_platform} == \"sles\" and (${host.os_version} == \"15 SP1\" or ${host.os_version} == \"15-SP1\" or ${host.os_version} == \"15 SP2\" or ${host.os_version} == \"15-SP2\" or ${host.os_version} == \"15 SP3\" or ${host.os_version} == \"15-SP3\" or ${host.os_version} == \"15 SP4\" or ${host.os_version} == \"15-SP4\" or ${host.os_version} == \"15 SP5\" or ${host.os_version} == \"15-SP5\" or ${host.os_version} == \"15 SP6\" or ${host.os_version} == \"15-SP6\" or ${host.os_version} == \"15 SP7\" or ${host.os_version} == \"15-SP7\" or ${host.os_version} == \"16.0\")))",
+                    "tags": null
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "system",
+                    "version": "2.22.3",
+                    "policy_template": "system",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "winlog-system-2f9664b6-036f-4521-ba33-abe637125ede",
+                "revision": 1,
+                "name": "system-endpoints",
+                "type": "winlog",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "2f9664b6-036f-4521-ba33-abe637125ede",
+                "streams": [
+                  {
+                    "id": "winlog-system.application-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.application"
+                    },
+                    "name": "Application",
+                    "condition": "${host.platform} == 'windows'",
+                    "ignore_older": "72h"
+                  },
+                  {
+                    "id": "winlog-system.security-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.security"
+                    },
+                    "name": "Security",
+                    "condition": "${host.platform} == 'windows'",
+                    "ignore_older": "72h",
+                    "tags": null,
+                    "include_xml": true,
+                    "processors": [
+                      {
+                        "decode_xml": {
+                          "when": {
+                            "and": [
+                              {
+                                "has_fields": [
+                                  "winlog.event_data.TaskContent"
+                                ]
+                              },
+                              {
+                                "equals": {
+                                  "winlog.provider_name": "Microsoft-Windows-Security-Auditing"
+                                }
+                              }
+                            ]
+                          },
+                          "field": "winlog.event_data.TaskContent",
+                          "target_field": "winlog._tmp.scheduled_task.task_content",
+                          "to_lower": true,
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      },
+                      {
+                        "decode_xml": {
+                          "when": {
+                            "and": [
+                              {
+                                "has_fields": [
+                                  "winlog.event_data.TaskContentNew"
+                                ]
+                              },
+                              {
+                                "equals": {
+                                  "winlog.provider_name": "Microsoft-Windows-Security-Auditing"
+                                }
+                              }
+                            ]
+                          },
+                          "field": "winlog.event_data.TaskContentNew",
+                          "target_field": "winlog._tmp.scheduled_task.task_content_new",
+                          "to_lower": true,
+                          "ignore_missing": true,
+                          "ignore_failure": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "winlog-system.system-2f9664b6-036f-4521-ba33-abe637125ede",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "system.system"
+                    },
+                    "name": "System",
+                    "condition": "${host.platform} == 'windows'",
+                    "ignore_older": "72h"
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "system",
+                    "version": "2.22.3",
+                    "policy_template": "system",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "winlog-winlogs-4d26b5f9-84d5-4e9e-a106-01459b946c83",
+                "revision": 1,
+                "name": "windows-defender",
+                "type": "winlog",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "4d26b5f9-84d5-4e9e-a106-01459b946c83",
+                "streams": [
+                  {
+                    "id": "winlog-winlog.winlogs-4d26b5f9-84d5-4e9e-a106-01459b946c83",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "winlog.winlog",
+                      "elasticsearch": {
+                        "dynamic_dataset": true,
+                        "dynamic_namespace": true
+                      }
+                    },
+                    "condition": "${host.platform} == 'windows'",
+                    "name": "Microsoft-Windows-Windows Defender/Operational",
+                    "ignore_older": "72h"
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "winlog",
+                    "version": "2.6.0",
+                    "policy_template": "winlogs",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "osquery-osquery_manager-90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                "revision": 1,
+                "name": "osquery-endpoints",
+                "type": "osquery",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                "streams": [
+                  {
+                    "id": "osquery-osquery_manager.action.responses-90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "osquery_manager.action.responses"
+                    },
+                    "query": null
+                  },
+                  {
+                    "id": "osquery-osquery_manager.query_profile-90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "osquery_manager.query_profile"
+                    },
+                    "enabled": true
+                  },
+                  {
+                    "id": "osquery-osquery_manager.result-90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                    "data_stream": {
+                      "type": "logs",
+                      "dataset": "osquery_manager.result"
+                    },
+                    "query": null
+                  }
+                ],
+                "meta": {
+                  "package": {
+                    "name": "osquery_manager",
+                    "version": "1.33.0",
+                    "policy_template": "osquery_manager",
+                    "release": "ga"
+                  }
+                }
+              },
+              {
+                "id": "b3346b0d-d25d-4247-81fc-5bd8dc1d4697",
+                "revision": 1,
+                "name": "elastic-defend-endpoints",
+                "type": "endpoint",
+                "data_stream": {
+                  "namespace": "default"
+                },
+                "use_output": "default",
+                "package_policy_id": "b3346b0d-d25d-4247-81fc-5bd8dc1d4697",
+                "integration_config": {
+                  "type": "endpoint",
+                  "endpointConfig": {
+                    "preset": "DataCollection"
+                  }
+                },
+                "artifact_manifest": {
+                  "manifest_version": "1.0.0",
+                  "schema_version": "v1",
+                  "artifacts": {
+                    "endpoint-exceptionlist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-exceptionlist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-exceptionlist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-exceptionlist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-exceptionlist-linux-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-exceptionlist-linux-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-trustlist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-trustlist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-trustlist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-trustlist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-trustlist-linux-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-trustlist-linux-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-eventfilterlist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-eventfilterlist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-eventfilterlist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-eventfilterlist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-eventfilterlist-linux-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-eventfilterlist-linux-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-hostisolationexceptionlist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-hostisolationexceptionlist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-hostisolationexceptionlist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-hostisolationexceptionlist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-hostisolationexceptionlist-linux-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-hostisolationexceptionlist-linux-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-blocklist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-blocklist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-blocklist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-blocklist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-blocklist-linux-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-blocklist-linux-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-trusteddevicelist-macos-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-trusteddevicelist-macos-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    },
+                    "endpoint-trusteddevicelist-windows-v1": {
+                      "encryption_algorithm": "none",
+                      "decoded_sha256": "d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "decoded_size": 14,
+                      "encoded_sha256": "f8e6afa1d5662f5b37f83337af774b5785b5b7f1daee08b7b00c2d6813874cda",
+                      "encoded_size": 22,
+                      "relative_url": "/api/fleet/artifacts/endpoint-trusteddevicelist-windows-v1/d801aa1fb7ddcc330a5e3173372ea6af4a3d08ec58074478e85aa5603e926658",
+                      "compression_algorithm": "zlib"
+                    }
+                  }
+                },
+                "policy": {
+                  "meta": {
+                    "license": "basic",
+                    "license_uuid": "7f3dff2d-ff49-4f7c-9a7a-572b60601c04",
+                    "cluster_uuid": "QmZm6FPKSOq-9gpa1WG-3Q",
+                    "cluster_name": "securityonion",
+                    "cloud": false,
+                    "serverless": false,
+                    "billable": false
+                  },
+                  "global_manifest_version": "latest",
+                  "global_telemetry_enabled": false,
+                  "windows": {
+                    "events": {
+                      "credential_access": true,
+                      "dll_and_driver_load": true,
+                      "dns": true,
+                      "file": true,
+                      "network": true,
+                      "process": true,
+                      "registry": true,
+                      "security": true
+                    },
+                    "device_control": {
+                      "enabled": false,
+                      "usb_storage": "audit"
+                    },
+                    "malware": {
+                      "mode": "off",
+                      "blocklist": false,
+                      "on_write_scan": false
+                    },
+                    "ransomware": {
+                      "mode": "off",
+                      "supported": false
+                    },
+                    "memory_protection": {
+                      "mode": "off",
+                      "supported": false
+                    },
+                    "behavior_protection": {
+                      "mode": "off",
+                      "reputation_service": false,
+                      "supported": false
+                    },
+                    "popup": {
+                      "malware": {
+                        "message": "",
+                        "enabled": true
+                      },
+                      "ransomware": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "memory_protection": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "behavior_protection": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "device_control": {
+                        "message": "",
+                        "enabled": false
+                      }
+                    },
+                    "logging": {
+                      "file": "info"
+                    },
+                    "antivirus_registration": {
+                      "mode": "disabled",
+                      "enabled": false
+                    },
+                    "attack_surface_reduction": {
+                      "credential_hardening": {
+                        "enabled": false
+                      }
+                    }
+                  },
+                  "mac": {
+                    "events": {
+                      "dns": true,
+                      "process": true,
+                      "file": true,
+                      "network": true,
+                      "security": true
+                    },
+                    "malware": {
+                      "mode": "off",
+                      "blocklist": false,
+                      "on_write_scan": false
+                    },
+                    "ransomware": {
+                      "mode": "off",
+                      "supported": false
+                    },
+                    "device_control": {
+                      "enabled": false,
+                      "usb_storage": "audit"
+                    },
+                    "behavior_protection": {
+                      "mode": "off",
+                      "reputation_service": false,
+                      "supported": false
+                    },
+                    "memory_protection": {
+                      "mode": "off",
+                      "supported": false
+                    },
+                    "popup": {
+                      "malware": {
+                        "message": "",
+                        "enabled": true
+                      },
+                      "ransomware": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "behavior_protection": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "memory_protection": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "device_control": {
+                        "message": "",
+                        "enabled": false
+                      }
+                    },
+                    "logging": {
+                      "file": "info"
+                    },
+                    "advanced": {
+                      "capture_env_vars": "DYLD_INSERT_LIBRARIES,DYLD_FRAMEWORK_PATH,DYLD_LIBRARY_PATH,LD_PRELOAD"
+                    }
+                  },
+                  "linux": {
+                    "events": {
+                      "dns": true,
+                      "file": true,
+                      "process": true,
+                      "network": true,
+                      "session_data": false,
+                      "tty_io": false
+                    },
+                    "malware": {
+                      "mode": "off",
+                      "blocklist": false,
+                      "on_write_scan": false
+                    },
+                    "behavior_protection": {
+                      "mode": "off",
+                      "reputation_service": false,
+                      "supported": false
+                    },
+                    "memory_protection": {
+                      "mode": "off",
+                      "supported": false
+                    },
+                    "popup": {
+                      "malware": {
+                        "message": "",
+                        "enabled": true
+                      },
+                      "behavior_protection": {
+                        "message": "",
+                        "enabled": false
+                      },
+                      "memory_protection": {
+                        "message": "",
+                        "enabled": false
+                      }
+                    },
+                    "logging": {
+                      "file": "info"
+                    },
+                    "advanced": {
+                      "capture_env_vars": "LD_PRELOAD,LD_LIBRARY_PATH"
+                    }
+                  }
+                },
+                "meta": {
+                  "package": {
+                    "name": "endpoint",
+                    "version": "9.4.1",
+                    "release": "ga"
+                  }
+                }
+              }
+            ],
+            "secret_references": [],
+            "revision": 8,
+            "agent": {
+              "download": {
+                "sourceURI": "http://192.168.182.10:8443/artifacts/"
+              },
+              "monitoring": {
+                "enabled": true,
+                "logs": true,
+                "metrics": false,
+                "traces": false,
+                "namespace": "default",
+                "use_output": "default"
+              },
+              "features": {},
+              "protection": {
+                "enabled": false,
+                "uninstall_token_hash": "VsSBWvdtZCFK0oBZuyLMqmhvBHAJeIBLpHPkJMhpLDg=",
+                "signing_key": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEfCw+ySot3dToILwFDpMpIBpCmNjQIelCZNOEtjlQ5/3Unh5vP3x9tkDImp80DycoRbnUdqePK2a2/KJA0vXAIA=="
+              },
+              "logging": {
+                "level": "warning"
+              }
+            },
+            "signed": {
+              "data": "eyJpZCI6ImVuZHBvaW50cy1pbml0aWFsIiwiYWdlbnQiOnsiZmVhdHVyZXMiOnt9LCJwcm90ZWN0aW9uIjp7ImVuYWJsZWQiOmZhbHNlLCJ1bmluc3RhbGxfdG9rZW5faGFzaCI6IlZzU0JXdmR0WkNGSzBvQlp1eUxNcW1odkJIQUplSUJMcEhQa0pNaHBMRGc9Iiwic2lnbmluZ19rZXkiOiJNRmt3RXdZSEtvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVmQ3creVNvdDNkVG9JTHdGRHBNcElCcENtTmpRSWVsQ1pOT0V0amxRNS8zVW5oNXZQM3g5dGtESW1wODBEeWNvUmJuVWRxZVBLMmEyL0tKQTB2WEFJQT09In19LCJpbnB1dHMiOlt7ImlkIjoid2lubG9nLXdpbmRvd3MtOGFmNmU3OTUtMmZmMi00MmZkLWIwNjctNzJlMTc5YzRhZDQxIiwibmFtZSI6IndpbmRvd3MtZW5kcG9pbnRzIiwicmV2aXNpb24iOjEsInR5cGUiOiJ3aW5sb2cifSx7ImlkIjoibG9nZmlsZS1zeXN0ZW0tMmY5NjY0YjYtMDM2Zi00NTIxLWJhMzMtYWJlNjM3MTI1ZWRlIiwibmFtZSI6InN5c3RlbS1lbmRwb2ludHMiLCJyZXZpc2lvbiI6MSwidHlwZSI6ImxvZ2ZpbGUifSx7ImlkIjoiam91cm5hbGQtc3lzdGVtLTJmOTY2NGI2LTAzNmYtNDUyMS1iYTMzLWFiZTYzNzEyNWVkZSIsIm5hbWUiOiJzeXN0ZW0tZW5kcG9pbnRzIiwicmV2aXNpb24iOjEsInR5cGUiOiJqb3VybmFsZCJ9LHsiaWQiOiJ3aW5sb2ctc3lzdGVtLTJmOTY2NGI2LTAzNmYtNDUyMS1iYTMzLWFiZTYzNzEyNWVkZSIsIm5hbWUiOiJzeXN0ZW0tZW5kcG9pbnRzIiwicmV2aXNpb24iOjEsInR5cGUiOiJ3aW5sb2cifSx7ImlkIjoid2lubG9nLXdpbmxvZ3MtNGQyNmI1ZjktODRkNS00ZTllLWExMDYtMDE0NTliOTQ2YzgzIiwibmFtZSI6IndpbmRvd3MtZGVmZW5kZXIiLCJyZXZpc2lvbiI6MSwidHlwZSI6IndpbmxvZyJ9LHsiaWQiOiJvc3F1ZXJ5LW9zcXVlcnlfbWFuYWdlci05MGJmNmY1Ny1lNDdkLTQ3OTktOGVhNC0yN2ZkODgwMzExOGYiLCJuYW1lIjoib3NxdWVyeS1lbmRwb2ludHMiLCJyZXZpc2lvbiI6MSwidHlwZSI6Im9zcXVlcnkifSx7ImlkIjoiYjMzNDZiMGQtZDI1ZC00MjQ3LTgxZmMtNWJkOGRjMWQ0Njk3IiwibmFtZSI6ImVsYXN0aWMtZGVmZW5kLWVuZHBvaW50cyIsInJldmlzaW9uIjoxLCJ0eXBlIjoiZW5kcG9pbnQifV19",
+              "signature": "MEQCIFmt7csKizC0NWb4lWfbo6bUdzTiaN4Swokk4Hb4Pe/JAiA7E9lXvKEeJqL9iKl6zHkZ5dmq3Piue1mX5rP3VC3MDA=="
+            },
+            "namespaces": [
+              "default"
+            ],
+            "output_permissions": {
+              "default": {
+                "_elastic_agent_monitoring": {
+                  "indices": [
+                    {
+                      "names": [
+                        "logs-elastic_agent.apm_server-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.auditbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.cloud_defend-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.cloudbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.endpoint_security-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.filebeat_input-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.filebeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.fleet_server-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.heartbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.metricbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.osquerybeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.packetbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.pf_elastic_collector-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.pf_elastic_symbolizer-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.pf_host_agent-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-elastic_agent.status_change-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                },
+                "_elastic_agent_checks": {
+                  "cluster": [
+                    "monitor"
+                  ]
+                },
+                "8af6e795-2ff2-42fd-b067-72e179c4ad41": {
+                  "indices": [
+                    {
+                      "names": [
+                        "logs-windows.forwarded-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-windows.powershell-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-windows.powershell_operational-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-windows.sysmon_operational-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                },
+                "2f9664b6-036f-4521-ba33-abe637125ede": {
+                  "indices": [
+                    {
+                      "names": [
+                        "logs-system.auth-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.syslog-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.auth-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.syslog-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.application-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.security-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-system.system-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                },
+                "4d26b5f9-84d5-4e9e-a106-01459b946c83": {
+                  "indices": [
+                    {
+                      "names": [
+                        "logs-*-*"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                },
+                "90bf6f57-e47d-4799-8ea4-27fd8803118f": {
+                  "indices": [
+                    {
+                      "names": [
+                        "logs-osquery_manager.action.responses-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-osquery_manager.query_profile-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-osquery_manager.result-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                },
+                "b3346b0d-d25d-4247-81fc-5bd8dc1d4697": {
+                  "indices": [
+                    {
+                      "names": [
+                        ".logs-endpoint.action.responses-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        ".logs-endpoint.actions-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.alerts-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.api-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        ".logs-endpoint.diagnostic.collection-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.device-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.file-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        ".logs-endpoint.heartbeat-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.library-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "metrics-endpoint.metadata-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "metrics-endpoint.metrics-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.network-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "metrics-endpoint.policy-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.process-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.registry-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    },
+                    {
+                      "names": [
+                        "logs-endpoint.events.security-default"
+                      ],
+                      "privileges": [
+                        "auto_configure",
+                        "create_doc"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "fleet": {
+              "hosts": [
+                "https://192.168.182.10:8220",
+                "https://shyonion:8220"
+              ]
+            }
+          },
+          "policy_id": "endpoints-initial",
+          "policy_base_id": "endpoints-initial",
+          "default_fleet_server": false
+        }
+      }
+    ]
+  }
+}

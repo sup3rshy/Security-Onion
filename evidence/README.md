@@ -13,7 +13,11 @@ Sinh ra từ phiên chạy 6 kịch bản ngày 2026-11-25. Nội dung diễn gi
 | `s2-msf-authlog-failed.txt` | 2 | Trích `/var/log/auth.log` trên target (host visibility) |
 | `s3-zeek-http-markers.json` | 3 | `zeek.http`: method/URI/UA/status của 2 request có marker |
 | `s5-zeek-file.json` | 5 | `zeek.file`: MIME, size, MD5/SHA1, fuid khớp với `zeek.http` |
-| `s6-zeek-http-canary.json` | 6 | Request của attacker vào honeypot (port 8081) |
+| `s4-fleet-agent.json` | 4 | Bản ghi agent trong `.fleet-agents` (host kali, policy endpoints-initial, 9.4.5) |
+| `s4-process-marker.json` | 4 | `endpoint.events.process` chứa marker + chuỗi `base64 -d` |
+| `s4-process-sample.json` | 4 | 5 process event mới nhất từ endpoint |
+| `s4-endpoint-datasets.json` | 4 | Tổng hợp dataset từ host kali (process/file/network) |
+| `s4-policy-inputs.json` | 4 | Cấu trúc policy `endpoints-initial` đã đẩy xuống agent |
 
 ## Hai file không nằm trong git
 

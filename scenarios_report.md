@@ -11,7 +11,7 @@ Tài liệu đi kèm `Readme.md`, dùng để ghi nhận kết quả thực nghi
 | 1 | Network Scanning | ✅ Đã chạy lại đầy đủ trên VMware: 12 cổng mở, `zeek.conn` 1001 cổng đích khác nhau, PCAP 1.993 packet, Suricata có alert liên quan scan (ET SCAN Potential SSH Scan). Chi tiết §7.1 |
 | 2 | Authentication Attack Simulation | ✅ 6 lần sai mật khẩu SSH từ `192.168.100.50`; Zeek `zeek.ssh` + auth.log trên target đều xác nhận. Chi tiết §7.2 |
 | 3 | Suspicious Web Activity | ✅ `zeek.http` ghi đủ method/URI/User-Agent/status của cả request 404 có marker và request UA `SO-LAB-TEST`. Chi tiết §7.3 |
-| 4 | Endpoint Detection | ⚠️ **Chưa hoàn tất** — chặn ở firewall Fleet (8220) và không có endpoint Windows có quyền admin. Đã xác minh hạ tầng Fleet + enrollment token tồn tại. Chi tiết §7.4 |
+| 4 | Endpoint Detection | ✅ Đã enroll Elastic Agent (host `kali`, policy `endpoints-initial`) và có 8.237 process event trong Hunt, gồm marker `SO-LAB-POWERSHELL` và chuỗi `base64 -d &#124; bash`; phải sửa 4 lỗi firewall/DNS/CA mới thông. Chi tiết §7.4 |
 | 5 | File Transfer + PCAP Investigation | ✅ Truyền `lab-test.txt` qua HTTP, hash hai đầu khớp, `zeek.http` + `zeek.file` có bằng chứng. Chi tiết §7.5 |
 | 6 | Honeypot | ✅ OpenCanary (SSH 2222 + HTTP 8081) bị kết nối từ `192.168.100.188`; log canary + `zeek.http` xác nhận. Chi tiết §7.6 |
 
@@ -305,23 +305,44 @@ Analyst trả lời được đủ: **ai gọi, gọi cái gì, bằng UA nào, 
 
 **Artifact:** `evidence/s3-zeek-http-markers.json`.
 
-## 7.4. Scenario 4 — Endpoint Detection (T1059.001 / T1082) ⚠️ CHƯA HOÀN TẤT
+## 7.4. Scenario 4 — Endpoint Detection (T1059.001 / T1082) ✅
 
-**Đã xác minh được:**
+**Kết quả:** Elastic Agent đã cài trên endpoint, **enroll vào Fleet thành công** và **telemetry process chảy về SOC** — chuỗi "Agent → Fleet → Elasticsearch → Hunt" đã thông suốt và có bằng chứng.
 
-- `so-elastic-fleet` chạy bình thường, Fleet Server listen `0.0.0.0:8220` (docker-proxy).
-- Tồn tại 4 enrollment API key trong `.fleet-enrollment-api-keys`: `FleetServer_shyonion`, **`endpoints-initial`**, `so-grid-nodes_general`, `so-grid-nodes_heavy` → policy cho endpoint đã có sẵn.
-- Đã chạy `sudo so-firewall includehost fleet 192.168.182.0/24 --apply` → "Successfully applied firewall changes".
+| Thành phần | Giá trị |
+|---|---|
+| Agent ID | `fafbd3a0-fb37-47ed-b9e8-a024432c2db3` |
+| Host | `kali` (Kali GNU/Linux 2026.2, kernel 6.19.14) |
+| Agent version | 9.4.5 (stack 9.4.5) |
+| Agent policy | `endpoints-initial` |
+| Trạng thái | `elastic-agent: HEALTHY Running`, `fleet: Connected` |
+| Dữ liệu | 8.237 `endpoint.events.process` + `endpoint.events.file/network` trong 60 phút |
 
-**Chỗ chặn (đã kiểm tra, không phải suy đoán):**
+**Bốn lỗi thật phải sửa mới chạy được** (mỗi lỗi đều đã kiểm chứng, không phải suy đoán):
 
-1. **Port 8220 vẫn không truy cập được** từ Kali (`curl -k https://192.168.182.10:8220/api/status` → `http=000`) và từ WSL (`/dev/tcp` closed), trong khi 443 mở. `nft ruleset` có DNAT `tcp dport 8220 → 172.17.1.21:8220` nhưng counter accept vẫn 0 → hostgroup `fleet` chưa thực sự mở chiều vào.
-2. **Không có phiên SOC admin** để lấy lệnh cài agent từ UI: `so-user password --email shy@gmail.com` bị từ chối với cả mật khẩu 14 và 18 ký tự đủ 4 lớp ("Password does not meet the minimum requirements"). Cần mật khẩu SOC cũ hoặc chỉnh policy qua `so-user valpass`.
-3. **Không có endpoint Windows có quyền admin** để cài Sysmon + Elastic Agent. VM `Windows 10 x64` có trong máy nhưng không có thông tin đăng nhập/quyền quản trị.
+| # | Triệu chứng | Nguyên nhân | Cách sửa |
+|---|---|---|---|
+| 1 | `curl https://<SO>:8220` → `http=000` | `DOCKER-USER` của SO chỉ mở 80/443 cho hostgroup `analyst`; 8220 thuộc hostgroup **`elastic_agent_endpoint`** (role `eval`) | `sudo so-firewall includehost elastic_agent_endpoint 192.168.182.0/24 --apply` |
+| 2 | Port 9200 đóng từ endpoint | Output của agent đi thẳng **Elasticsearch:9200**, port này chỉ mở cho hostgroup `eval` | `sudo so-firewall includehost eval 192.168.182.0/24 --apply` |
+| 3 | `lookup shyonion on 8.8.8.8:53: no such host` | Policy đẩy output theo **hostname** `shyonion`, endpoint không có DNS nội bộ | thêm `192.168.182.10 shyonion` vào `/etc/hosts` của endpoint |
+| 4 | `x509: certificate signed by unknown authority` | CA tự ký của SO không có trong trust store của endpoint | chép `/etc/pki/ca.crt` của SO vào `/usr/local/share/ca-certificates/` rồi `update-ca-certificates` |
 
-**Để hoàn tất cần:** (a) mở được 8220 cho dải 192.168.182.0/24 (kiểm tra lại hostgroup + `so-firewall apply`), (b) mật khẩu SOC của `shy@gmail.com`, (c) một endpoint Windows có admin. Khi có đủ, các bước còn lại giữ nguyên như `scenarios_step_by_step.md` §4.3.
+**Bằng chứng Hunt (process telemetry):**
 
-**Không đánh dấu hoàn thành** vì chưa có bằng chứng process-creation trong Hunt.
+| Thời điểm (UTC) | process.name | process.command_line | parent |
+|---|---|---|---|
+| 01:09:16.32 | `bash` | `bash -c echo SO-LAB-POWERSHELL-MARKER-2026` | bash |
+| 01:09:16.37 | `base64` | `base64` | bash |
+| 01:09:16.38 | `bash` | `bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash` | bash |
+| 01:18:11.22 | `bash` | `bash -c echo SO-LAB-POWERSHELL-MARKER-2026` | bash |
+
+Cùng bản ghi còn có `user.name`, `host.name`, `process.hash.sha256` — analyst có đủ **user, tiến trình cha, hash, command line nguyên bản**, đúng thứ mà Zeek/Suricata không thể thấy khi traffic đã mã hoá.
+
+**Sai khác so với scenario gốc (Windows + Sysmon):** dùng endpoint **Linux** thay vì Windows vì VM `Windows 10 x64` trong máy không có mật khẩu/quyền admin để cài Sysmon. Luận điểm kiến trúc giữ nguyên: chỉ host telemetry mới cho biết *tiến trình nào* sinh ra kết nối; khác biệt chỉ ở nguồn dữ liệu (Sysmon Event ID 1 ↔ `endpoint.events.process` của Elastic Defend). Muốn đúng bản Windows: cài Sysmon + agent trên một Windows VM có quyền admin.
+
+**Lưu ý kỹ thuật:** trong `.fleet-policies`, input `endpoint` có mảng `streams` rỗng, nhưng **không** có nghĩa Defend tắt — Defend dùng policy revision riêng (`elastic-defend-endpoints` rev 1) và vẫn bắt sự kiện bình thường. Đừng kết luận từ trường `streams`.
+
+**Artifact:** `evidence/s4-fleet-agent.json`, `s4-process-marker.json`, `s4-process-sample.json`, `s4-endpoint-datasets.json`, `s4-policy-inputs.json`.
 
 ## 7.5. Scenario 5 — File Transfer + PCAP ✅
 
@@ -374,20 +395,25 @@ Honeypot giảm nhiễu đúng lý thuyết: không có lý do hợp lệ nào �
 
 ## 7.7. Cases
 
-Chưa tạo Case trong SOC UI ở phiên này (cần phiên đăng nhập SOC — xem §7.4 mục 2 — và thao tác UI). Nội dung Case đề xuất, đã đủ bằng chứng để điền:
+Chưa tạo Case bằng API trong phiên này. Đăng nhập SOC **đã hoạt động** (kiểm chứng end-to-end bằng đúng luồng Kratos: tạo flow → POST credentials → nhận session `aal1`), nhưng endpoint `/api/cases` của ứng dụng SOC trả 401/404 khi gọi bằng cookie phiên (cần token/CSRF riêng của app), nên Case vẫn để cho UI — khoảng 5 phút với tài khoản đã đặt lại.
 
-| Case | Title | Source → Target | Disposition |
-|---|---|---|---|
-| 1 | LAB Scenario 1 — Network Service Scanning | 192.168.100.50 → 192.168.100.188 | Authorized lab activity |
-| 2 | LAB Scenario 2 — SSH Brute Force | 192.168.100.50 → 192.168.100.188:22 | Authorized lab activity |
-| 3 | LAB Scenario 3 — Suspicious Web Activity | 192.168.100.50 → 192.168.100.188:80 | Authorized lab activity |
-| 5 | LAB Scenario 5 — File Transfer | 192.168.100.50:8000 → 192.168.100.188 | Authorized lab activity |
-| 6 | LAB Scenario 6 — Honeypot Hit | 192.168.100.188 → 192.168.100.50:2222/8081 | Authorized lab activity |
+Nội dung 6 Case, đã đủ bằng chứng để điền:
+
+| Case | Title | Source → Target | Disposition | Đính kèm |
+|---|---|---|---|---|
+| 1 | LAB Scenario 1 — Network Service Scanning | 192.168.100.50 → 192.168.100.188 | Authorized lab activity | s1-scan.txt, s1-capture.pcap, s1-zeek-conn-scan.json |
+| 2 | LAB Scenario 2 — SSH Brute Force | 192.168.100.50 → 192.168.100.188:22 | Authorized lab activity | s2-msf-authlog-failed.txt, s2-zeek-ssh.json |
+| 3 | LAB Scenario 3 — Suspicious Web Activity | 192.168.100.50 → 192.168.100.188:80 | Authorized lab activity | s3-zeek-http-markers.json |
+| 4 | LAB Scenario 4 — Suspicious Process on Endpoint | host `kali` (agent fafbd3a0) | Authorized lab activity | s4-process-marker.json |
+| 5 | LAB Scenario 5 — File Transfer | 192.168.100.50:8000 → 192.168.100.188 | Authorized lab activity | s5-zeek-file.json, hash 2 đầu |
+| 6 | LAB Scenario 6 — Honeypot Hit | 192.168.100.188 → 192.168.100.50:2222/8081 | Authorized lab activity | canary log, s6-zeek-http-canary.json |
 
 ## 7.8. Trạng thái lab bàn giao
 
 - **IP tĩnh đã bền vững sau reboot** (đã test thật): Kali dùng unit `lab-net.service` (eth0 .60 / eth1 .50 + default route + DNS); Metasploitable dùng `/etc/network/interfaces` (eth0 .188). ssh/apache của target bật ở boot.
-- Mật khẩu OS của SO và của VM lab đã được đặt lại trong phiên này — **không ghi vào repo**, xem ghi chú bàn giao ngoài repo.
+- **Mật khẩu** OS của SO, của VM lab, và mật khẩu SOC của `shy@gmail.com` đã được đặt lại trong các phiên này — **không ghi vào repo**, xem ghi chú bàn giao ngoài repo. Lệnh `so-user password` cũng **tắt MFA** của user đó.
+- **Elastic Agent trên Kali** (từ Scenario 4) đã cài ở `/opt/Elastic/Agent`, service `elastic-agent` enabled, policy `endpoints-initial`. Ba thay đổi cần giữ để agent tiếp tục chạy: dòng `192.168.182.10 shyonion` trong `/etc/hosts` của Kali, CA của SO trong `/usr/local/share/ca-certificates/so-ca.crt`, và hai hostgroup `elastic_agent_endpoint` + `eval` (dải 192.168.182.0/24) trong firewall của SO.
+- **Firewall SO đã mở thêm** cho dải lab: 8220/9200 (Fleet/ES) — ghi lại để biết đây là thay đổi có chủ đích, không phải mặc định của SO.
 - Snapshot `before-passwd-reset` vẫn còn trên VM `secOnion`; xoá bằng `vmrun -T ws deleteSnapshot` khi đã chắc chắn.
-- Console VNC không mật khẩu vẫn bật trên `kali` (5903) và `Metasploitable` (5902) để tiện thao tác lab; chỉ truy cập được từ chính máy host (Windows firewall chặn từ ngoài). Gỡ bằng cách xoá 2 dòng `RemoteDisplay.vnc.*` trong file .vmx khi máy đang tắt.
+- **Console VNC không mật khẩu vẫn bật** trên `kali` (5903) và `Metasploitable` (5902). Đã thử gỡ tự động nhưng **bị chặn bởi sandbox** (ổ D chỉ đọc với phiên hiện tại), nên để lại. Chỉ truy cập được từ chính máy host (Windows firewall chặn từ ngoài). Muốn gỡ: tắt VM → xoá 2 dòng `RemoteDisplay.vnc.*` trong file .vmx → bật lại.
 - OpenCanary và HTTP server của Scenario 5 chạy dạng tiến trình tạm, đã dừng sau reboot; chạy lại theo §7.6 và §7.5 khi cần demo.

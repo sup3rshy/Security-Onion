@@ -1,0 +1,50 @@
+{
+  "took": 150,
+  "timed_out": false,
+  "_shards": {
+    "total": 32,
+    "successful": 32,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 8660,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": []
+  },
+  "aggregations": {
+    "ds": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "endpoint.events.process",
+          "doc_count": 7604
+        },
+        {
+          "key": "elastic_agent.endpoint_security",
+          "doc_count": 584
+        },
+        {
+          "key": "endpoint.events.file",
+          "doc_count": 246
+        },
+        {
+          "key": "elastic_agent",
+          "doc_count": 211
+        },
+        {
+          "key": "elastic_agent.osquerybeat",
+          "doc_count": 10
+        },
+        {
+          "key": "endpoint.events.network",
+          "doc_count": 5
+        }
+      ]
+    }
+  }
+}

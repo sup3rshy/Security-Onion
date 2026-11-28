@@ -1,0 +1,177 @@
+{
+  "took": 7,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
+    },
+    "max_score": 1.89712,
+    "hits": [
+      {
+        "_index": ".fleet-agents-7",
+        "_id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+        "_score": 1.89712,
+        "_source": {
+          "access_api_key_id": "E1CwH6IB-v2Y2g8ScIev",
+          "action_seq_no": [
+            -1
+          ],
+          "active": true,
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "version": "9.4.5"
+          },
+          "enrolled_at": "2026-11-28T01:06:26Z",
+          "local_metadata": {
+            "elastic": {
+              "agent": {
+                "build.original": "9.4.5 (build: 7a92f7b9479cbfbcb88c94c398660e981dee3d14 at 2026-08-05 20:21:40 +0000 UTC)",
+                "complete": false,
+                "fips": false,
+                "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+                "log_level": "warning",
+                "snapshot": false,
+                "unprivileged": false,
+                "upgradeable": true,
+                "version": "9.4.5"
+              }
+            },
+            "host": {
+              "architecture": "x86_64",
+              "hostname": "kali",
+              "id": "48c1fa8275a845d6bbc7bd66dbb4e07d",
+              "ip": [
+                "127.0.0.1/8",
+                "192.168.182.60/24",
+                "192.168.100.50/24",
+                "::1/128"
+              ],
+              "mac": [
+                "00:0c:29:42:81:ea",
+                "00:0c:29:42:81:f4"
+              ],
+              "name": "kali"
+            },
+            "os": {
+              "family": "debian",
+              "full": "Kali GNU/Linux kali-rolling(2026.2)",
+              "kernel": "6.19.14+kali-amd64",
+              "name": "Kali GNU/Linux",
+              "platform": "kali",
+              "version": "2026.2"
+            }
+          },
+          "namespaces": [
+            "default"
+          ],
+          "policy_base_id": "endpoints-initial",
+          "policy_id": "endpoints-initial",
+          "type": "PERMANENT",
+          "outputs": {
+            "default": {
+              "api_key": "J1CwH6IB-v2Y2g8SfIfl:iDeQeOWoncBY4RfZ8uWtAw",
+              "permissions_hash": "354788473dc34dc3c7af638ac610ab05901465912add244e09a4826e2061fa0f",
+              "type": "elasticsearch",
+              "api_key_id": "J1CwH6IB-v2Y2g8SfIfl"
+            }
+          },
+          "policy_revision_idx": 8,
+          "updated_at": "2026-11-28T01:17:46Z",
+          "sequence_num": 0,
+          "components": [
+            {
+              "id": "filestream-monitoring",
+              "units": [
+                {
+                  "id": "filestream-monitoring",
+                  "type": "output",
+                  "message": "Starting",
+                  "status": "STARTING"
+                },
+                {
+                  "payload": {
+                    "streams": {
+                      "filestream-monitoring-endpoint": {
+                        "error": "",
+                        "status": "STARTING"
+                      },
+                      "filestream-monitoring-agent": {
+                        "error": "",
+                        "status": "STARTING"
+                      }
+                    }
+                  },
+                  "id": "filestream-monitoring-filestream-monitoring-agent",
+                  "type": "input",
+                  "message": "Starting",
+                  "status": "STARTING"
+                }
+              ],
+              "type": "filestream",
+              "message": "STARTING",
+              "status": "STARTING"
+            },
+            {
+              "id": "log-default",
+              "units": [
+                {
+                  "id": "log-default",
+                  "type": "output",
+                  "message": "Starting: spawned pid '22265'",
+                  "status": "STARTING"
+                },
+                {
+                  "id": "log-default-logfile-system-2f9664b6-036f-4521-ba33-abe637125ede",
+                  "type": "input",
+                  "message": "Starting: spawned pid '22265'",
+                  "status": "STARTING"
+                }
+              ],
+              "type": "log",
+              "message": "Starting: spawned pid '22265'",
+              "status": "STARTING"
+            },
+            {
+              "id": "osquery-default",
+              "units": [
+                {
+                  "id": "osquery-default-osquery-osquery_manager-90bf6f57-e47d-4799-8ea4-27fd8803118f",
+                  "type": "input",
+                  "message": "Starting: spawned pid '22267'",
+                  "status": "STARTING"
+                },
+                {
+                  "id": "osquery-default",
+                  "type": "output",
+                  "message": "Starting: spawned pid '22267'",
+                  "status": "STARTING"
+                }
+              ],
+              "type": "osquery",
+              "message": "Starting: spawned pid '22267'",
+              "status": "STARTING"
+            }
+          ],
+          "last_checkin_message": "Waiting for initial configuration and composable variables",
+          "upgrade": {
+            "rollbacks": []
+          },
+          "last_checkin_status": "starting",
+          "agent_policy_id": "endpoints-initial",
+          "last_checkin": "2026-11-28T01:17:36Z",
+          "unhealthy_reason": [
+            "output"
+          ],
+          "last_known_status": "online"
+        }
+      }
+    ]
+  }
+}

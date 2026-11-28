@@ -1,0 +1,1243 @@
+{
+  "took": 20,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 10,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "YVC6H6IB-v2Y2g8SAZo6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "dJnLj7FhJndFNlJ7ZAxjng",
+                "cVbotpxQMHIkxdwupo9hcA",
+                "IiObowACQ4lOPY3ufF/cSA",
+                "/m0caf5/wks4U/IjtUxMJw",
+                "fZBQWM+V/mXxr7qx708f6w"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo SO-LAB-POWERSHELL-MARKER-2026"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 17266,
+              "args_count": 2,
+              "entity_id": "dJnLj7FhJndFNlJ7ZAxjng",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 17268,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "+6ptPY00f1TxKa0gz7qVpg",
+            "command_line": "bash -c echo SO-LAB-POWERSHELL-MARKER-2026",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:09:16.32Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 6033,
+            "ingested": "2026-11-28T01:16:52Z",
+            "created": "2026-11-28T01:09:16.3299675Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++/ko",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828156320
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "aFC6H6IB-v2Y2g8SAZo6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "RMAdpy9YvhAz5Q9ziJmYQw",
+                "dJnLj7FhJndFNlJ7ZAxjng",
+                "cVbotpxQMHIkxdwupo9hcA",
+                "IiObowACQ4lOPY3ufF/cSA",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "base64"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 17273,
+              "args_count": 2,
+              "entity_id": "RMAdpy9YvhAz5Q9ziJmYQw",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "base64",
+            "pid": 17275,
+            "working_directory": "/home/kali",
+            "args_count": 1,
+            "entity_id": "utLMuu4vUjdhvdubnOgnrw",
+            "command_line": "base64",
+            "executable": "/usr/bin/base64",
+            "hash": {
+              "sha256": "f313ecf95b108257c6011071064a6dc79f603ec8aa1339a74f048e7468bf4fa1"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:09:16.37Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 6059,
+            "ingested": "2026-11-28T01:16:52Z",
+            "created": "2026-11-28T01:09:16.3792574Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++/l5",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828156370
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "alC6H6IB-v2Y2g8SAZo6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "pst5nQFvH3KQwPmD3qQt4w",
+                "dJnLj7FhJndFNlJ7ZAxjng",
+                "cVbotpxQMHIkxdwupo9hcA",
+                "IiObowACQ4lOPY3ufF/cSA",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-c",
+                "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+              ],
+              "name": "bash",
+              "pid": 17276,
+              "args_count": 3,
+              "entity_id": "pst5nQFvH3KQwPmD3qQt4w",
+              "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 17277,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "Y7qhdQz9/8YH5IDDMKk0cg",
+            "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:09:16.38Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 6068,
+            "ingested": "2026-11-28T01:16:52Z",
+            "created": "2026-11-28T01:09:16.3869152Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++/lC",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828156380
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "a1C6H6IB-v2Y2g8SAZo6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "pst5nQFvH3KQwPmD3qQt4w",
+                "dJnLj7FhJndFNlJ7ZAxjng",
+                "cVbotpxQMHIkxdwupo9hcA",
+                "IiObowACQ4lOPY3ufF/cSA",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "base64",
+              "-d"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-c",
+                "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+              ],
+              "name": "bash",
+              "pid": 17276,
+              "args_count": 3,
+              "entity_id": "pst5nQFvH3KQwPmD3qQt4w",
+              "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "base64",
+            "pid": 17278,
+            "working_directory": "/home/kali",
+            "args_count": 2,
+            "entity_id": "txnrpB1ajkxG4R4wQ3EKgA",
+            "command_line": "base64 -d",
+            "executable": "/usr/bin/base64",
+            "hash": {
+              "sha256": "f313ecf95b108257c6011071064a6dc79f603ec8aa1339a74f048e7468bf4fa1"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:09:16.38Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 6072,
+            "ingested": "2026-11-28T01:16:52Z",
+            "created": "2026-11-28T01:09:16.3894438Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++/lF",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828156380
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "bVC6H6IB-v2Y2g8SAZo6",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "dJnLj7FhJndFNlJ7ZAxjng",
+                "cVbotpxQMHIkxdwupo9hcA",
+                "IiObowACQ4lOPY3ufF/cSA",
+                "/m0caf5/wks4U/IjtUxMJw",
+                "fZBQWM+V/mXxr7qx708f6w"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 17266,
+              "args_count": 2,
+              "entity_id": "dJnLj7FhJndFNlJ7ZAxjng",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 17276,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "pst5nQFvH3KQwPmD3qQt4w",
+            "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:09:16.38Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 6076,
+            "ingested": "2026-11-28T01:16:52Z",
+            "created": "2026-11-28T01:09:16.3925704Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++/lH",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828156380
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "x1C7H6IB-v2Y2g8SX7So",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "hAVV8LbSH2LOjT52rrUgAQ",
+                "Yxt3vvCbYgZCJEmMJJlIRA",
+                "vj4pN3kmCCF0JGgR/SsA/g",
+                "/m0caf5/wks4U/IjtUxMJw",
+                "fZBQWM+V/mXxr7qx708f6w"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo SO-LAB-POWERSHELL-MARKER-2026"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 23284,
+              "args_count": 2,
+              "entity_id": "hAVV8LbSH2LOjT52rrUgAQ",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 23285,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "a/4J8gkYj/rL2WXV4oTajw",
+            "command_line": "bash -c echo SO-LAB-POWERSHELL-MARKER-2026",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:18:11.22Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 29976,
+            "ingested": "2026-11-28T01:18:23Z",
+            "created": "2026-11-28T01:18:11.234225Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++6xy",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828691220
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "yVC7H6IB-v2Y2g8SX7So",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "ERGJpT926k9EbXyxIa13yA",
+                "hAVV8LbSH2LOjT52rrUgAQ",
+                "Yxt3vvCbYgZCJEmMJJlIRA",
+                "vj4pN3kmCCF0JGgR/SsA/g",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "base64"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 23286,
+              "args_count": 2,
+              "entity_id": "ERGJpT926k9EbXyxIa13yA",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "base64",
+            "pid": 23288,
+            "working_directory": "/home/kali",
+            "args_count": 1,
+            "entity_id": "/dECOzabMJQrlSGHsUJ5vQ",
+            "command_line": "base64",
+            "executable": "/usr/bin/base64",
+            "hash": {
+              "sha256": "f313ecf95b108257c6011071064a6dc79f603ec8aa1339a74f048e7468bf4fa1"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:18:11.23Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 29984,
+            "ingested": "2026-11-28T01:18:23Z",
+            "created": "2026-11-28T01:18:11.239741Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++6y2",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828691230
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "y1C7H6IB-v2Y2g8SX7So",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "jNc9q8TooU56RlPes2S7RA",
+                "hAVV8LbSH2LOjT52rrUgAQ",
+                "Yxt3vvCbYgZCJEmMJJlIRA",
+                "vj4pN3kmCCF0JGgR/SsA/g",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-c",
+                "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+              ],
+              "name": "bash",
+              "pid": 23289,
+              "args_count": 3,
+              "entity_id": "jNc9q8TooU56RlPes2S7RA",
+              "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 23290,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "0UAxZdbMyh6eMv4o09qFxQ",
+            "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:18:11.24Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 29992,
+            "ingested": "2026-11-28T01:18:23Z",
+            "created": "2026-11-28T01:18:11.246622Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++6y8",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828691240
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "zFC7H6IB-v2Y2g8SX7So",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "jNc9q8TooU56RlPes2S7RA",
+                "hAVV8LbSH2LOjT52rrUgAQ",
+                "Yxt3vvCbYgZCJEmMJJlIRA",
+                "vj4pN3kmCCF0JGgR/SsA/g",
+                "/m0caf5/wks4U/IjtUxMJw"
+              ]
+            },
+            "args": [
+              "base64",
+              "-d"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-c",
+                "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+              ],
+              "name": "bash",
+              "pid": 23289,
+              "args_count": 3,
+              "entity_id": "jNc9q8TooU56RlPes2S7RA",
+              "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "base64",
+            "pid": 23291,
+            "working_directory": "/home/kali",
+            "args_count": 2,
+            "entity_id": "TFTtAadNLZglquYIeAOF9w",
+            "command_line": "base64 -d",
+            "executable": "/usr/bin/base64",
+            "hash": {
+              "sha256": "f313ecf95b108257c6011071064a6dc79f603ec8aa1339a74f048e7468bf4fa1"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:18:11.24Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 29997,
+            "ingested": "2026-11-28T01:18:23Z",
+            "created": "2026-11-28T01:18:11.250041Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++6yD",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828691240
+        ]
+      },
+      {
+        "_index": ".ds-logs-endpoint.events.process-default-2026.11.28-000001",
+        "_id": "zlC7H6IB-v2Y2g8SX7So",
+        "_score": null,
+        "_source": {
+          "agent": {
+            "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3",
+            "type": "endpoint",
+            "version": "9.4.5"
+          },
+          "process": {
+            "Ext": {
+              "ancestry": [
+                "hAVV8LbSH2LOjT52rrUgAQ",
+                "Yxt3vvCbYgZCJEmMJJlIRA",
+                "vj4pN3kmCCF0JGgR/SsA/g",
+                "/m0caf5/wks4U/IjtUxMJw",
+                "fZBQWM+V/mXxr7qx708f6w"
+              ]
+            },
+            "args": [
+              "bash",
+              "-c",
+              "echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash"
+            ],
+            "parent": {
+              "args": [
+                "bash",
+                "-s"
+              ],
+              "name": "bash",
+              "pid": 23284,
+              "args_count": 2,
+              "entity_id": "hAVV8LbSH2LOjT52rrUgAQ",
+              "command_line": "bash -s",
+              "executable": "/usr/bin/bash"
+            },
+            "exit_code": 0,
+            "name": "bash",
+            "pid": 23289,
+            "working_directory": "/home/kali",
+            "args_count": 3,
+            "entity_id": "jNc9q8TooU56RlPes2S7RA",
+            "command_line": "bash -c echo ZWNobyBTTy1MQUItQkFTRTY0LURFQ09ERUQ= | base64 -d | bash",
+            "executable": "/usr/bin/bash",
+            "hash": {
+              "sha256": "a3240e3ca305f1482afce389898daece2551098b9862d6d540dcf5fa1822482f"
+            }
+          },
+          "message": "Endpoint process event",
+          "tags": [
+            "events.process"
+          ],
+          "@timestamp": "2026-11-28T01:18:11.24Z",
+          "ecs": {
+            "version": "8.10.0"
+          },
+          "data_stream": {
+            "namespace": "default",
+            "type": "logs",
+            "dataset": "endpoint.events.process"
+          },
+          "elastic": {
+            "agent": {
+              "id": "fafbd3a0-fb37-47ed-b9e8-a024432c2db3"
+            }
+          },
+          "host": {
+            "os": {
+              "type": "linux"
+            },
+            "name": "kali",
+            "id": "48c1fa8275a845d6bbc7bd66dbb4e07d"
+          },
+          "event": {
+            "agent_id_status": "verified",
+            "sequence": 30001,
+            "ingested": "2026-11-28T01:18:23Z",
+            "created": "2026-11-28T01:18:11.2520392Z",
+            "kind": "event",
+            "module": "endpoint",
+            "action": [
+              "fork",
+              "exec",
+              "end"
+            ],
+            "id": "OkcdCrIqzzBL276k+++++6yH",
+            "category": [
+              "process"
+            ],
+            "type": [
+              "start",
+              "start",
+              "end"
+            ],
+            "dataset": "endpoint.events.process",
+            "outcome": "unknown"
+          },
+          "user": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          },
+          "group": {
+            "Ext": {
+              "real": {
+                "name": "kali",
+                "id": 1000
+              }
+            },
+            "name": "kali",
+            "id": 1000
+          }
+        },
+        "sort": [
+          1795828691240
+        ]
+      }
+    ]
+  }
+}
